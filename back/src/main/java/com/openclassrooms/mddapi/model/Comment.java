@@ -23,12 +23,10 @@ public class Comment {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@Column(nullable = false)
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "post_id")
-	@Column(nullable = false)
 	private Post post;
 
 
