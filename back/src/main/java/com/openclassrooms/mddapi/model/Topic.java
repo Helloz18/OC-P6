@@ -1,14 +1,19 @@
 package com.openclassrooms.mddapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "topics")
+@Getter
+@Setter
+@ToString
 public class Topic {
 
 	@Id
@@ -19,20 +24,9 @@ public class Topic {
 	@Column(nullable = false)
 	private String name;
 
-	public Long getId() {
-		return id;
-	}
+	@ManyToMany(mappedBy = "topics")
+	private Set<User> users;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Post> posts;
 }
