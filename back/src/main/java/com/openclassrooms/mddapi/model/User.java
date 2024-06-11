@@ -22,7 +22,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String username;
+    private String name;
 
     @JsonIgnore
     @Column(nullable = false)
