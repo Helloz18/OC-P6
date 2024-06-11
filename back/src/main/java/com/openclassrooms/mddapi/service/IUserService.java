@@ -10,5 +10,5 @@ public interface IUserService {
 
     Optional<User> getUserByEmail(String email);
 
-    User save(UserDTO userDTO);
+    void save(UserDTO userDTO) throws Exception;
 }
