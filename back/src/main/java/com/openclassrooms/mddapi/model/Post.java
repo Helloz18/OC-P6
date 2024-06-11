@@ -37,4 +37,6 @@ public class Post {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments;
 
+	@Column(nullable = false)
+	private String createdAt;
 }
