@@ -10,8 +10,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/auth", consumes = MediaType.APPLICATION_JSON_VALUE)
+@Tag(name = "Auth controller", description = "Controller used to log in the application and to register a new user.")
+@RequestMapping(value = "/api/auth")
 public class AuthController {
 
     private JwtService jwtService;
@@ -42,11 +43,30 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Log in the application.",
+            description = "Give a valid email and password, then a token will be generated.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "a JWT token.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "User unknown.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class))),
+            @ApiResponse(responseCode = "401", description = "Bad credentials.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)))
+    })
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         if(userService.getUserByEmail(loginRequest.getEmail()).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The user is unknown.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("The user is unknown."));
         } else {
-            String token = createToken(loginRequest.getEmail(), loginRequest.getPassword());
+
+        String token = "";
+           try {
+                token = createToken(loginRequest.getEmail(), loginRequest.getPassword());
+            } catch(Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(e.getMessage()));
+            }
             return ResponseEntity.ok(token);
         }
     }
@@ -65,7 +85,6 @@ public class AuthController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class)))
     })
-
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) throws Exception {
         if(userDTO.getName() == null || userDTO.getEmail() == null || userDTO.getPassword() == null
                 || userDTO.getName().isEmpty() || userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
@@ -87,16 +106,21 @@ public class AuthController {
      * @param password
      * @return
      */
-    private String createToken(String email, String password) {
+    private String createToken(String email, String password) throws Exception {
         String token = "";
-        Authentication
-                authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password));
-        if (authentication.isAuthenticated()) {
-             token = jwtService.generateToken(authentication);
-            return token;
-        }
-        return token;
+
+            Authentication
+                    authentication =
+                    authenticationManager.authenticate(
+                            new UsernamePasswordAuthenticationToken(email, password));
+            if (authentication.isAuthenticated()) {
+                token =
+                        jwtService.generateToken(authentication);
+                return token;
+            }
+        else {
+                throw new Exception();
+            }
     }
 
 }
