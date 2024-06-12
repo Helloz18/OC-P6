@@ -3,6 +3,11 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.arrow_back {
+  min-width: 39px;
+  min-height: 39px;
+  font-size:39px;
+}
 
 //Media query for responsive design
 
@@ -19,7 +24,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         margin-top:32px;
         width: 225px;
         height: 130px;
-        
+      }
+      .logo_header {
+        width: 225px;
+        height: 130px;
+      }
+      
+      .mat-toolbar {
+        min-height: 94px! important;
+        background-color: white ! important;
+       // border: 1px solid black;
       }
       .align_button {
         margin-top:54px;
@@ -42,6 +56,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .logo_full_screen {
         width: 412px;
         height: 238px;
+      }
+      
+      .logo_header {
+        width: 140px;
+        height: 81px;
+      }
+
+      .mat-toolbar {
+        min-height: 94px! important;
+        background-color: white ! important;
+        border: 1px solid black;
       }
       .align_button {
         display: flex;
