@@ -1,1 +1,30 @@
-<p>register works!</p>
+<mat-icon class="arrow_back">keyboard_backspace</mat-icon>
+
+  <!-- this logo will be displayed only on mobile -->
+<div class="position">
+  <img class="logo_header_mobile" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+</div>
+
+<div class="formulaire">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  
+<h2>Inscription</h2>
+  <div class="column">
+    <span class="label">Nom d'utilisateur</span>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="name">
+  </mat-form-field>
+
+  <span class="label">Adresse e-mail</span>
+<mat-form-field appearance="outline">
+  <input matInput type="email" formControlName="email">
+</mat-form-field>
+
+<span class="label">Mot de passe</span>
+  <mat-form-field appearance="outline">
+    <input matInput type="password" formControlName="password">
+  </mat-form-field>
+  <button mat-flat-button type="submit" class="button_size" routerLink="/login">S'inscrire</button>
+</div>
+    </form>
+  </div>
