@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @Tag(name = "Auth controller", description = "Controller used to log in the application and to register a new user.")
 @RequestMapping(value = "/api/auth")
@@ -48,7 +51,7 @@ public class AuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "a JWT token.",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))),
+                            schema = @Schema(implementation = Object.class))),
             @ApiResponse(responseCode = "400", description = "User unknown.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class))),
@@ -61,9 +64,10 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("The user is unknown."));
         } else {
 
-        String token = "";
+        Map<String, String> token = new HashMap<>();
+
            try {
-                token = createToken(loginRequest.getEmail(), loginRequest.getPassword());
+                token.put("token", createToken(loginRequest.getEmail(), loginRequest.getPassword()));
             } catch(Exception e) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(e.getMessage()));
             }
@@ -77,7 +81,7 @@ public class AuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "a JWT token.",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))),
+                            schema = @Schema(implementation = Object.class))),
             @ApiResponse(responseCode = "400", description = "One or several of the mandatory fields is/are empty.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class))),
@@ -96,7 +100,8 @@ public class AuthController {
              return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(e.getMessage()));
             }
         }
-        String token = createToken(userDTO.getEmail(), userDTO.getPassword());
+        Map<String, String> token = new HashMap<>();
+        token.put("token", createToken(userDTO.getEmail(), userDTO.getPassword()));
         return ResponseEntity.ok(token);
     }
 
