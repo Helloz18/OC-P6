@@ -1,5 +1,15 @@
-<mat-toolbar>
+<div  class="toolbar_home">
+  <mat-toolbar>
     <a>
-      <img src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+      <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
     </a>
 </mat-toolbar>
+</div>
+
+<div  class="toolbar_connected" *ngIf="loggedIn">
+  <mat-toolbar>
+    <a>
+      <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+    </a>
+</mat-toolbar>
+</div>

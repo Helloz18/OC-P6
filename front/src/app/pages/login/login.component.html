@@ -1,0 +1,35 @@
+<mat-icon class="arrow_back">keyboard_backspace</mat-icon>
+
+  <!-- this logo will be displayed only on mobile -->
+  <div class="position">
+    <img class="logo_header_mobile" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+  </div>
+  
+  <div class="formulaire">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    
+  <h2>Se connecter</h2>
+    <div class="column">
+  
+    <span class="label">Adresse e-mail</span>
+  <mat-form-field appearance="outline">
+    <input matInput type="email" formControlName="email" required>
+  </mat-form-field>
+  <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+    Un email est requis.
+  </mat-error>
+  
+  
+  <span class="label">Mot de passe</span>
+    <mat-form-field appearance="outline">
+      <input matInput type="password" formControlName="password" required>
+    </mat-form-field>
+    <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+      Un password est requis.
+    </mat-error>
+  
+    
+    <button mat-flat-button type="submit" class="button_size" routerLink="/login">Se connecter</button>
+  </div>
+      </form>
+    </div>

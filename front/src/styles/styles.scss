@@ -3,6 +3,20 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.arrow_back {
+  min-width: 39px;
+  min-height: 39px;
+  font-size:39px;
+  margin: 32px 0px 0px 32px;
+}
+.mat-mdc-form-field-error {
+  margin-top: -20px;
+}
+.mat-mdc-text-field-wrapper {
+  max-height: 50px;
+}
+//color: #7763C5;
+
 
 //Media query for responsive design
 
@@ -19,7 +33,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         margin-top:32px;
         width: 225px;
         height: 130px;
-        
+      }
+      .logo_header {
+        width: 225px;
+        height: 130px;
+      }
+      
+      .toolbar_home {
+        display: none;
+      }
+      .mat-toolbar {
+        min-height: 94px! important;
+        background-color: white ! important;
+        border: 1px solid black;
+      }
+      .logo_header_mobile {
+        width: 225px;
+        height: 130px;
+        display: flex;
+        justify-content: center;
       }
       .align_button {
         margin-top:54px;
@@ -42,6 +74,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .logo_full_screen {
         width: 412px;
         height: 238px;
+      }
+      
+      .logo_header {
+        width: 140px;
+        height: 81px;
+      }
+
+      .logo_header_mobile{
+        display: none;
+      }
+      .mat-toolbar {
+        min-height: 94px! important;
+        background-color: white ! important;
+        border: 1px solid black;
       }
       .align_button {
         display: flex;
