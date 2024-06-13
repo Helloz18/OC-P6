@@ -12,18 +12,30 @@
   <div class="column">
     <span class="label">Nom d'utilisateur</span>
   <mat-form-field appearance="outline">
-    <input matInput formControlName="name">
+    <input matInput formControlName="name" required>
   </mat-form-field>
+  <mat-error *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched">
+    Un nom d'utilisateur est requis.
+  </mat-error>
 
   <span class="label">Adresse e-mail</span>
 <mat-form-field appearance="outline">
-  <input matInput type="email" formControlName="email">
+  <input matInput type="email" formControlName="email" required>
 </mat-form-field>
+<mat-error *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+  Un email est requis.
+</mat-error>
+
 
 <span class="label">Mot de passe</span>
   <mat-form-field appearance="outline">
-    <input matInput type="password" formControlName="password">
+    <input matInput type="password" formControlName="password" required>
   </mat-form-field>
+  <mat-error *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+    Un password de minimum 8 caractères, contenant au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial est requis.
+  </mat-error>
+
+  
   <button mat-flat-button type="submit" class="button_size" routerLink="/login">S'inscrire</button>
 </div>
     </form>

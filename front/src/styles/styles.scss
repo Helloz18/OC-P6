@@ -9,7 +9,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size:39px;
   margin: 32px 0px 0px 32px;
 }
-
+.mat-mdc-form-field-error {
+  margin-top: -20px;
+}
+.mat-mdc-text-field-wrapper {
+  max-height: 50px;
+}
 //color: #7763C5;
 
 

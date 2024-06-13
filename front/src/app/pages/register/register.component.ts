@@ -17,12 +17,13 @@ import { MatButtonModule } from '@angular/material/button';
 export class RegisterComponent {
 
   registerForm: FormGroup;
+  passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.pattern(this.passwordPattern)]]
     });
   }
 
