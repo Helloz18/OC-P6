@@ -22,3 +22,26 @@
     margin-right: 25px;
     align-items: center;
 }
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+    position: fixed;
+    right:0px;
+    top: 0px;
+    width:184px;
+    border: 1px solid black;
+    z-index: 1;
+    background-color: white;
+    box-shadow: -100px 0px grey 0.5;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content:space-between;
+  }
+.space { 
+    height: 100%;
+}

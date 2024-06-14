@@ -4,6 +4,9 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
   --customColor: #7763C5;}
 
+a {
+  cursor: pointer;
+}
 .arrow_back {
   min-width: 39px;
   min-height: 39px;

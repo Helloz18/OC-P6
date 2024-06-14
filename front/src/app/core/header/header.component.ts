@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed } from '@angular/core';
+import { Component, ElementRef, ViewChild, computed } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -17,6 +17,16 @@ export class HeaderComponent {
  
   // this will get the value of the signal loggedIn() and be informed thanks to computed for any change on this value
   loggedIn = computed(() => this.tokenService.loggedIn());
+
+  @ViewChild('menu') menu!: ElementRef;
+
   
  constructor(private tokenService: TokenStorageService) {}
+
+ openMenu() {
+    const mymenu = this.menu.nativeElement;
+    mymenu.classList.add("show");
+  
+
+ }
 }
