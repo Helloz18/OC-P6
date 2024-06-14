@@ -35,13 +35,12 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
         next: (data) => {
-          console.log("ok");
-          if (data.type == HttpEventType.Response) {
-            this.tokenStorage.saveToken(data.body.token);
-            this.router.navigateByUrl('/topics');
+          if(data.type == HttpEventType.Response) {
+            this.router.navigateByUrl('/login');
           }
         },
         error: (e) => {
+          alert(e.error.message)
           console.log(e);
         }
       })
