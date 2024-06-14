@@ -7,7 +7,5 @@ import { TopicComponent } from '../topic/topic.component';
  */
 export const HOME_ROUTES: Routes = [
   { path: '', component: HomeComponent }, 
-  { path: '', loadChildren: () => import('src/app/core/core.routes').then(r => r.CORE_ROUTES) },
-  { path: 'topics', component: TopicComponent}
-   
+  { path: '', loadChildren: () => import('src/app/core/core.routes').then(r => r.CORE_ROUTES) },  
 ];
