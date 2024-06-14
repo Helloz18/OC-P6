@@ -1,4 +1,4 @@
-<mat-icon class="arrow_back">keyboard_backspace</mat-icon>
+<mat-icon class="arrow_back" (click)="goToHome()">keyboard_backspace</mat-icon>
 
   <!-- this logo will be displayed only on mobile -->
   <div class="position">
@@ -29,7 +29,7 @@
     </mat-error>
   
     
-    <button mat-flat-button type="submit" class="button_size" routerLink="/login">Se connecter</button>
+    <button mat-flat-button type="submit" class="button_size" routerLink="/login" [disabled]="loginForm.invalid">Se connecter</button>
   </div>
       </form>
     </div>
