@@ -35,15 +35,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
         height: 130px;
       }
       .logo_header {
-        width: 225px;
-        height: 130px;
+        width: 92px;
+        height: 53px;
       }
       
       .toolbar_home {
         display: none;
       }
+      
+      .toolbar_computer {
+        display: none;
+      }
       .mat-toolbar {
-        min-height: 94px! important;
+        min-height: 62px! important;
         background-color: white ! important;
         border: 1px solid black;
       }
@@ -82,6 +86,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
       }
 
       .logo_header_mobile{
+        display: none;
+      }
+      .toolbar_mobile {
         display: none;
       }
       .mat-toolbar {
