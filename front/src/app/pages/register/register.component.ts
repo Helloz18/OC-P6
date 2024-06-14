@@ -47,4 +47,9 @@ export class RegisterComponent {
       })
     }
   }
+
+  
+  goToHome() {
+    this.router.navigateByUrl('/');
+  }
 }
