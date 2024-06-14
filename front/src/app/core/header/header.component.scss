@@ -1,0 +1,24 @@
+.profil {
+    color: grey !important;
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+}
+.header_btn {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.2px;
+    text-align: left;
+}
+.active {
+    color: var(--customColor) !important;
+}
+.right_part {
+    width: 100%;
+    column-gap: 1em;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+    align-items: center;
+}

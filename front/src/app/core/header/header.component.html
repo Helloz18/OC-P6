@@ -1,15 +1,22 @@
-<div  class="toolbar_home">
+<div  class="toolbar_home" *ngIf="!loggedIn()">
   <mat-toolbar>
     <a>
       <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
     </a>
 </mat-toolbar>
 </div>
-
-<div  class="toolbar_connected" *ngIf="loggedIn">
+<div  class="toolbar_connected" *ngIf="loggedIn()">
   <mat-toolbar>
     <a>
       <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
     </a>
-</mat-toolbar>
+    <div class="right_part">
+    <button mat-button class="header_btn" [routerLink]="['/articles']"
+    routerLinkActive="active" >Articles</button>
+    <button mat-button class="header_btn" [routerLink]="['/topics']"
+    routerLinkActive="active" 
+    >Thèmes</button>
+    <a [routerLink]="['/profil']"><mat-icon class="profil">account_circle</mat-icon></a>
+  </div>
+  </mat-toolbar>
 </div>
