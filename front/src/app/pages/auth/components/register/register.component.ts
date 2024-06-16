@@ -5,9 +5,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { HttpEventType } from '@angular/common/http';
-import { TokenStorageService } from '../services/token-storage.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 import { Router } from '@angular/router';
 
 
@@ -35,13 +35,12 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
         next: (data) => {
-          console.log("ok");
-          if (data.type == HttpEventType.Response) {
-            this.tokenStorage.saveToken(data.body.token);
-            this.router.navigateByUrl('/topics');
+          if(data.type == HttpEventType.Response) {
+            this.router.navigateByUrl('/login');
           }
         },
         error: (e) => {
+          alert(e.error.message)
           console.log(e);
         }
       })

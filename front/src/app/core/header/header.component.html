@@ -1,15 +1,72 @@
-<div  class="toolbar_home">
+<div (click)="openCloseMenu($event)">
+<div class="toolbar_home" *ngIf="!loggedIn()">
   <mat-toolbar>
-    <a>
-      <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
-    </a>
-</mat-toolbar>
+    <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+  </mat-toolbar>
 </div>
-
-<div  class="toolbar_connected" *ngIf="loggedIn">
+<div class="toolbar_computer" *ngIf="loggedIn()">
   <mat-toolbar>
-    <a>
-      <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
-    </a>
-</mat-toolbar>
+    <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+    <div class="right_part">
+      <button
+        mat-button
+        class="header_btn"
+        [routerLink]="['/posts']"
+        routerLinkActive="active"
+      >
+        Articles
+      </button>
+      <button
+        mat-button
+        class="header_btn"
+        [routerLink]="['/topics']"
+        routerLinkActive="active"
+      >
+        Thèmes
+      </button>
+      <a [routerLink]="['/profile']"
+      routerLinkActive="logo_user active_icon"
+        ><img class="logo_user" src="assets/user_grey.png"></a
+      >
+    </div>
+  </mat-toolbar>
+</div>
+<div class="toolbar_mobile" *ngIf="loggedIn()">
+  <mat-toolbar>
+    <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+    <div #overlay class="right_part">
+      <a (click)="openCloseMenu($event)"><mat-icon>dehaze</mat-icon></a>
+      <div #menu class="hide space">
+        <div class="column space">
+          <div class="column">
+            <br />
+            <br />
+            <button
+              mat-button
+              class="header_btn"
+              [routerLink]="['/posts']"
+              routerLinkActive="active"
+            >
+              Articles
+            </button>
+            <button
+              mat-button
+              class="header_btn"
+              [routerLink]="['/topics']"
+              routerLinkActive="active"
+            >
+              Thèmes
+            </button>
+          </div>
+
+          <div>
+            <a [routerLink]="['/profile']"
+              ><img class="logo_user" src="assets/user_grey.png"></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>
 </div>

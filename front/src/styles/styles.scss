@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  --customColor: #7763C5;}
 
+a {
+  cursor: pointer;
+}
 .arrow_back {
   min-width: 39px;
   min-height: 39px;
@@ -16,8 +20,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-text-field-wrapper {
   max-height: 50px;
 }
-//color: #7763C5;
-
 
 //Media query for responsive design
 
@@ -36,18 +38,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         height: 130px;
       }
       .logo_header {
-        width: 225px;
-        height: 130px;
+        width: 92px;
+        height: 53px;
       }
       
       .toolbar_home {
         display: none;
       }
+      
+      .toolbar_computer {
+        display: none;
+      }
       .mat-toolbar {
-        min-height: 94px! important;
+        min-height: 62px! important;
         background-color: white ! important;
         border: 1px solid black;
-      }
+       }
       .logo_header_mobile {
         width: 225px;
         height: 130px;
@@ -61,6 +67,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         justify-content: space-between;
         height: 116.5px;
       }
+      
+.logo_user {
+  width: 48px;
+  height: 48px;
+  margin-right: 5px;
+}
   }
 
   //Computer
@@ -85,6 +97,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       .logo_header_mobile{
         display: none;
       }
+      .toolbar_mobile {
+        display: none;
+      }
       .mat-toolbar {
         min-height: 94px! important;
         background-color: white ! important;
@@ -95,5 +110,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         flex-direction: row;
         justify-content: space-between;
         width: 377px;
+      }
+      .logo_user {
+        width: 48px;
+        height: 48px;
+        margin-top: 10px;
+      }
+      .active_icon { 
+        margin-top: 2px;
+        content:url("/assets/user.png");
       }
   }
