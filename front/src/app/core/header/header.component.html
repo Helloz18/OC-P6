@@ -32,15 +32,13 @@
 <div class="toolbar_mobile" *ngIf="loggedIn()">
   <mat-toolbar>
     <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
-    <div class="right_part">
+    <div #overlay class="right_part">
       <a (click)="openMenu()"><mat-icon>dehaze</mat-icon></a>
       <div #menu class="hide space">
-        
         <div class="column space">
-          
           <div class="column">
-            <br>
-            <br>
+            <br />
+            <br />
             <button
               mat-button
               class="header_btn"

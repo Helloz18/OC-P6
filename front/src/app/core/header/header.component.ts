@@ -19,6 +19,7 @@ export class HeaderComponent {
   loggedIn = computed(() => this.tokenService.loggedIn());
 
   @ViewChild('menu') menu!: ElementRef;
+  @ViewChild('overlay') overlay!: ElementRef;
 
   
  constructor(private tokenService: TokenStorageService) {}
@@ -26,6 +27,9 @@ export class HeaderComponent {
  openMenu() {
     const mymenu = this.menu.nativeElement;
     mymenu.classList.add("show");
+    const myoverlay = this.overlay.nativeElement;
+    myoverlay.classList.add("overlay");
+
   
 
  }
