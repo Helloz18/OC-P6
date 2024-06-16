@@ -1,3 +1,4 @@
+<div (click)="openCloseMenu($event)">
 <div class="toolbar_home" *ngIf="!loggedIn()">
   <mat-toolbar>
     <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
@@ -33,7 +34,7 @@
   <mat-toolbar>
     <img class="logo_header" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
     <div #overlay class="right_part">
-      <a (click)="openMenu()"><mat-icon>dehaze</mat-icon></a>
+      <a (click)="openCloseMenu($event)"><mat-icon>dehaze</mat-icon></a>
       <div #menu class="hide space">
         <div class="column space">
           <div class="column">
@@ -66,4 +67,5 @@
       </div>
     </div>
   </mat-toolbar>
+</div>
 </div>

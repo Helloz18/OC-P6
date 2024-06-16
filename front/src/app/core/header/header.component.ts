@@ -24,13 +24,17 @@ export class HeaderComponent {
   
  constructor(private tokenService: TokenStorageService) {}
 
- openMenu() {
+ openCloseMenu(event: Event) {
     const mymenu = this.menu.nativeElement;
-    mymenu.classList.add("show");
     const myoverlay = this.overlay.nativeElement;
+    if(mymenu.classList.contains('show')) {
+    mymenu.classList.remove("show");
+    myoverlay.classList.remove("overlay");
+    event.stopPropagation();
+  } else {
+    mymenu.classList.add("show");
     myoverlay.classList.add("overlay");
-
-  
-
+    event.stopPropagation();
+  }
  }
 }
