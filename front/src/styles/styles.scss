@@ -67,6 +67,12 @@ a {
         justify-content: space-between;
         height: 116.5px;
       }
+      
+.logo_user {
+  width: 48px;
+  height: 48px;
+  margin-right: 5px;
+}
   }
 
   //Computer
@@ -104,5 +110,10 @@ a {
         flex-direction: row;
         justify-content: space-between;
         width: 377px;
+      }
+      .logo_user {
+        width: 48px;
+        height: 48px;
+        margin-top: 10px;
       }
   }
