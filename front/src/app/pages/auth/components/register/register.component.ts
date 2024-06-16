@@ -5,9 +5,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { HttpEventType } from '@angular/common/http';
-import { TokenStorageService } from '../services/token-storage.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 import { Router } from '@angular/router';
 
 

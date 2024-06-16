@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { TokenStorageService } from 'src/app/pages/services/token-storage.service';
+import { TokenStorageService } from 'src/app/pages/auth/services/token-storage.service';
 
 @Component({
   selector: 'app-header',
