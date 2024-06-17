@@ -1,10 +1,10 @@
 package com.openclassrooms.mddapi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 import java.util.Set;
@@ -13,7 +13,6 @@ import java.util.Set;
 @Table(name = "topics")
 @Getter
 @Setter
-@ToString
 public class Topic {
 
 	@Id
@@ -24,9 +23,11 @@ public class Topic {
 	@Column(nullable = false)
 	private String name;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "topics")
 	private Set<User> users;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Post> posts;
 }
