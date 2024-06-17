@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.LoginRequestDTO;
+import com.openclassrooms.mddapi.dto.UserDTO;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,16 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public Optional<User> getUserByEmail(String email) {
          return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public UserDTO getUserDTOByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(email);
+        userDTO.setName(user.getName());
+        userDTO.setTopics(user.getTopics());
+        return userDTO;
     }
 
     @Override
