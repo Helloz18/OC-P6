@@ -20,6 +20,13 @@ a {
 .mat-mdc-text-field-wrapper {
   max-height: 50px;
 }
+.colored_border {
+  @extend .mat-mdc-text-field-wrapper;
+  border:1px solid var(--customColor);
+    border-radius: 8px;
+    max-height: 50px;
+    margin-bottom: 24px;
+}
 
 //Media query for responsive design
 
