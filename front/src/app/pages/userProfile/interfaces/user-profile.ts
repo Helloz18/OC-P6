@@ -1,4 +1,4 @@
-import { Topic } from "../../topic/interfaces/topic";
+import { Topic } from "../../topics/interfaces/topic";
 
 export interface UserProfile {
 
