@@ -60,8 +60,4 @@
 </div>
 <hr>
 <h2>Abonnements</h2>
-<div *ngFor="let topic of userProfile.topics" class="listOfTopics">
-    <div class="topic">
-        {{topic.name}}
-    </div>
-</div>
+<app-topic-list [userTopics]="userTopics"></app-topic-list>

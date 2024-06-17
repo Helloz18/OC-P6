@@ -1,27 +1,18 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { TopicService } from "../../services/topic.service";
+import { Topic } from "../../interfaces/topic";
 
 @Component({
   selector: 'app-topic',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './topic.component.html',
-  styleUrls: ['./topic.component.css']
+  styleUrls: ['./topic.component.scss']
 })
-export class TopicComponent implements OnInit {
+export class TopicComponent {
 
-  topics: any;
-
-  constructor(private topicService: TopicService) {}
-
-  ngOnInit(): void {
-    this.topicService.getAll().subscribe({
-      next: (data) => {
-        this.topics = data;
-      }
-    })
-  }
+  @Input()
+  topic!: Topic;
 
 
 }

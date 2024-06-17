@@ -6,17 +6,20 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { TopicListComponent } from 'src/app/pages/topics/components/topic-list/topic-list.component';
+import { Topic } from 'src/app/pages/topics/interfaces/topic';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, TopicListComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
 
   userProfile!: UserProfile;
+  userTopics: Topic[] = [];
   userProfileForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private userProfileService: UserProfileService) {
@@ -29,13 +32,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserProfile();
-    
   }
 
   getUserProfile() {
     this.userProfileService.getUserProfile().subscribe({
       next: (data) => {
         this.userProfile = data;
+        this.userTopics = data.topics!;
+        console.log(data);
       },
       error: (error) => {
         alert(error.error.message);
