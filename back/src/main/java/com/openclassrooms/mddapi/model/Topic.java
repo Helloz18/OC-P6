@@ -23,6 +23,9 @@ public class Topic {
 	@Column(nullable = false)
 	private String name;
 
+	@Column
+	private String description;
+
 	@JsonIgnore
 	@ManyToMany(mappedBy = "topics")
 	private Set<User> users;
