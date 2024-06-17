@@ -6,13 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserDTO implements UserDetails {
+public class LoginRequestDTO implements UserDetails {
 
     private String email;
     private String password;
     private String name;
 
-    public UserDTO(String email, String password, String name) {
+    public LoginRequestDTO(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;

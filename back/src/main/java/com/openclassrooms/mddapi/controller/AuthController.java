@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.dto.UserDTO;
+import com.openclassrooms.mddapi.dto.LoginRequestDTO;
 import com.openclassrooms.mddapi.model.LoginRequest;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.security.JwtService;
@@ -89,19 +89,19 @@ public class AuthController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class)))
     })
-    public ResponseEntity<?> register(@RequestBody UserDTO userDTO) throws Exception {
-        if(userDTO.getName() == null || userDTO.getEmail() == null || userDTO.getPassword() == null
-                || userDTO.getName().isEmpty() || userDTO.getEmail().isEmpty() || userDTO.getPassword().isEmpty()) {
+    public ResponseEntity<?> register(@RequestBody LoginRequestDTO loginRequestDTO) throws Exception {
+        if(loginRequestDTO.getName() == null || loginRequestDTO.getEmail() == null || loginRequestDTO.getPassword() == null
+                || loginRequestDTO.getName().isEmpty() || loginRequestDTO.getEmail().isEmpty() || loginRequestDTO.getPassword().isEmpty()) {
             return ResponseEntity.badRequest().body(new ResponseMessage("One or several of the mandatory fields is/are empty."));
         } else {
             try {
-                userService.save(userDTO);
+                userService.save(loginRequestDTO);
             } catch(Exception e) {
              return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(e.getMessage()));
             }
         }
         Map<String, String> token = new HashMap<>();
-        token.put("token", createToken(userDTO.getEmail(), userDTO.getPassword()));
+        token.put("token", createToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
         return ResponseEntity.ok(token);
     }
 
