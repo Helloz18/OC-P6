@@ -1,34 +1,67 @@
 <div class="formulaire">
-    <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-      
+  <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
     <h2>Profil utilisateur</h2>
-      <div class="column">
-        
+    <div class="column">
       <mat-form-field appearance="outline" class="colored_border">
-        <input matInput type="text" formControlName="name" required>
+        <input matInput type="text" formControlName="name" required />
       </mat-form-field>
-      <mat-error *ngIf="userProfileForm.controls['name'].invalid && userProfileForm.controls['name'].touched">
+      <mat-error
+        *ngIf="
+          userProfileForm.controls['name'].invalid &&
+          userProfileForm.controls['name'].touched
+        "
+      >
         Un username est requis.
       </mat-error>
-    
-    <mat-form-field appearance="outline" class="colored_border">
-      <input matInput type="email" formControlName="email" required>
-    </mat-form-field>
-    <mat-error *ngIf="userProfileForm.controls['email'].invalid && userProfileForm.controls['email'].touched">
-      Un email est requis.
-    </mat-error>
-      <mat-form-field appearance="outline"class="colored_border">
-        <input matInput type="password" formControlName="password" placeholder="mot de passe" required>
+
+      <mat-form-field appearance="outline" class="colored_border">
+        <input matInput type="email" formControlName="email" required />
       </mat-form-field>
-      <mat-error *ngIf="userProfileForm.controls['password'].invalid && userProfileForm.controls['password'].touched">
+      <mat-error
+        *ngIf="
+          userProfileForm.controls['email'].invalid &&
+          userProfileForm.controls['email'].touched
+        "
+      >
+        Un email est requis.
+      </mat-error>
+      <mat-form-field appearance="outline" class="colored_border">
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="mot de passe"
+          required
+        />
+      </mat-form-field>
+      <mat-error
+        *ngIf="
+          userProfileForm.controls['password'].invalid &&
+          userProfileForm.controls['password'].touched
+        "
+      >
         Un password est requis.
       </mat-error>
-    
-      
-      <button mat-flat-button type="submit" class="button_size" routerLink="/login" [disabled]="userProfileForm.invalid">Sauvegarder</button>
-      
-    <a class="logout">Se déconnecter</a>
-    </div>
-        </form>
 
-      </div>
+      <button
+        mat-flat-button
+        type="submit"
+        class="button_size"
+        routerLink="/login"
+        [disabled]="userProfileForm.invalid"
+      >
+        Sauvegarder
+      </button>
+
+    </div>
+  </form>
+  
+  <a class="logout">Se déconnecter</a>
+</div>
+<hr>
+<h2>Abonnements</h2>
+<div *ngFor="let topic of userProfile.topics" class="listOfTopics">
+    <div class="topic">
+        {{topic.name}}
+    </div>
+</div>

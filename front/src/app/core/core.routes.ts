@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 import { RegisterComponent } from '../pages/auth/components/register/register.component';
 import { LoginComponent } from '../pages/auth/components/login/login.component';
 import { ShellComponent } from './shell/shell.component';
-import { TopicComponent } from '../pages/topic/topic.component';
-import { PostListComponent } from '../pages/post/components/post-list/post-list.component';
+import { PostListComponent } from '../pages/posts/components/post-list/post-list.component';
 import { ProfileComponent } from '../pages/userProfile/components/profile/profile.component';
+import { TopicListComponent } from '../pages/topics/components/topic-list/topic-list.component';
 
 /**
  * ShellComponent will contain the header that will be displayed on every pages of the application
@@ -16,7 +16,7 @@ export const CORE_ROUTES: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'topics', component: TopicComponent },
+      { path: 'topics', component: TopicListComponent },
       { path: 'posts', component: PostListComponent },
       { path: 'profile', component: ProfileComponent }
     ],
