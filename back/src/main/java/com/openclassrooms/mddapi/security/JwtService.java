@@ -12,9 +12,11 @@ import java.time.temporal.ChronoUnit;
 public class JwtService {
 
     private JwtEncoder jwtEncoder;
+    private JwtDecoder jwtDecoder;
 
-    public JwtService(JwtEncoder jwtEncoder) {
+    public JwtService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder) {
         this.jwtEncoder = jwtEncoder;
+        this.jwtDecoder = jwtDecoder;
     }
 
     public String generateToken(Authentication authentication) {
@@ -29,5 +31,10 @@ public class JwtService {
         JwtEncoderParameters
                 jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
         return this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
+    }
+
+    public String getEmailByToken(String token) {
+            Jwt jwt = jwtDecoder.decode(token);
+            return jwt.getSubject();
     }
 }
