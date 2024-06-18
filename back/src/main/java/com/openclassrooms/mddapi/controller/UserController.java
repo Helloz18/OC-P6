@@ -27,10 +27,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    JwtService jwtService;
+    JwtService
+            jwtService;
 
     @Autowired
-    UserService userService;
+    UserService
+            userService;
 
     @GetMapping("")
     @Operation(summary = "Get information of the connected user.",
@@ -44,15 +46,19 @@ public class UserController {
                             schema = @Schema(implementation = Object.class)))
     })
     public ResponseEntity<?> getConnectedUser(
-            @Parameter(description = "Bearer token", example="Bearer eyJhbGciOJIUzI1NiJ9...")
+            @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
             @RequestHeader("Authorization") String bearer) throws Exception {
-        if(bearer == null) {
+        if (bearer == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
         } else {
             //The bearer token from the header is given with "bearer " before the actual token.
             //we remove this part to just give the token to the service.
-            String email = jwtService.getEmailByToken(bearer.substring(7));
-            UserDTO userDTO = userService.getUserDTOByEmail(email);
+            String
+                    email =
+                    jwtService.getEmailByToken(bearer.substring(7));
+            UserDTO
+                    userDTO =
+                    userService.getUserDTOByEmail(email);
             return ResponseEntity.ok(userDTO);
         }
     }
@@ -67,29 +73,50 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "The user doesn't exist in the database.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = String.class))),
-            })
+            @ApiResponse(responseCode = "401", description = "Invalid token.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "403", description = "User tries to use a token not linked to his account",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "409", description = "The email provided exists already for another user.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+    })
     public ResponseEntity<?> updateUser(
-            @Parameter(description = "Bearer token", example="Bearer eyJhbGciOJIUzI1NiJ9...")
+            @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
             @RequestHeader("Authorization") String bearer,
             @PathVariable String email, @RequestBody LoginRequestDTO loginRequestDTO
-    ){
-        if(userService.getUserByEmail(email).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("L'utilisateur n'existe pas."));
-        } else {
-            if(bearer == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage("Invalid token."));
-            } else {
-                //The bearer token from the header is given with "bearer " before the actual token.
-                //we remove this part to just give the token to the service.
-                String emailToken = jwtService.getEmailByToken(bearer.substring(7));
-                //Verify that the token is linked to the user who wants modification
-                if(!emailToken.equals(email)){
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage("L'utilisateur utilise un token non généré par ses credentials."));
-                }
+    ) {
+        if (!email.equals(loginRequestDTO.getEmail())) {
+            if (!userService.getUserByEmail(loginRequestDTO.getEmail()).isEmpty()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body(new ResponseMessage(("Cet email est déjà utilisé dans l'application.")));
             }
-
-            userService.updateUser(email, loginRequestDTO);
+        } else {
+            if (userService.getUserByEmail(email).isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseMessage("L'utilisateur n'existe pas."));
+            } else {
+                if (bearer == null) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                            .body(new ResponseMessage("Token non valide."));
+                } else {
+                    //The bearer token from the header is given with "bearer " before the actual token.
+                    //we remove this part to just give the token to the service.
+                    String
+                            emailToken =
+                            jwtService.getEmailByToken(bearer.substring(7));
+                    //Verify that the token is linked to the user who wants modification
+                    if (!emailToken.equals(email)) {
+                        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                                .body(new ResponseMessage(
+                                        "L'utilisateur utilise un token non généré par ses credentials."));
+                    }
+                }
+                userService.updateUser(email, loginRequestDTO);
+            }
         }
-        return ResponseEntity.ok(new ResponseMessage("User saved"));
+        return ResponseEntity.ok(new ResponseMessage("User modifié et enregistré en base de données."));
     }
 }
