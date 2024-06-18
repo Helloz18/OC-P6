@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UserProfile } from '../interfaces/user-profile';
+import { LoginRequest } from '../../auth/interfaces/login-request';
 
 const BACKEND_URL= environment.backendUrl + "/profile"
 
@@ -21,5 +22,9 @@ export class UserProfileService {
 
   getUserProfile() {
     return this.http.get<UserProfile>(BACKEND_URL);
+  }
+
+  updateUserProfile(email: string, modifiedUser:LoginRequest) {
+    return this.http.put(BACKEND_URL +"/"+ email, modifiedUser);
   }
 }

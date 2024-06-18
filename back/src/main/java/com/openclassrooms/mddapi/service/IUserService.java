@@ -14,4 +14,6 @@ public interface IUserService {
     UserDTO getUserDTOByEmail(String email);
 
     void save(LoginRequestDTO loginRequestDTO) throws Exception;
+
+    void updateUser(String email, LoginRequestDTO loginRequestDTO);
 }

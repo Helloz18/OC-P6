@@ -10,6 +10,8 @@ const USER_KEY = 'auth-user';
 
 export class TokenStorageService {
 
+  passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
+
   //thanks to signal we can be updated in real time of the changes of this value
   loggedIn = signal(false);
 

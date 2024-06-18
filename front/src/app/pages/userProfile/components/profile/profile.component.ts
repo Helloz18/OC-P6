@@ -24,11 +24,11 @@ export class ProfileComponent implements OnInit {
   userTopics: Topic[] = [];
   userProfileForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private tokenStrorageService: TokenStorageService, private router: Router) {
+  constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private tokenStorageService: TokenStorageService, private router: Router) {
     this.userProfileForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['',Validators.pattern(this.tokenStorageService.passwordPattern)]
     });
   }
 
@@ -41,7 +41,6 @@ export class ProfileComponent implements OnInit {
       next: (data) => {
         this.userProfile = data;
         this.userTopics = data.topics!;
-        console.log(data);
       },
       error: (error) => {
         alert(error.error.message);
@@ -50,18 +49,36 @@ export class ProfileComponent implements OnInit {
         this.userProfileForm = this.fb.group({
           name: [this.userProfile.name, [Validators.required]],
           email: [this.userProfile.email, [Validators.required, Validators.email]],
-          password: ['', [Validators.required]]
+          password: ['', Validators.pattern(this.tokenStorageService.passwordPattern)]
         });
       }
     })
   }
   
   onSubmit() {
-    console.log(this.userProfileForm)
+    let userToSend;
+    if(this.userProfileForm.controls['password'].value =='') {
+      userToSend = {
+        name: this.userProfileForm.controls['name'].value,
+        email: this.userProfileForm.controls['email'].value,
+      }
+    } else {
+      userToSend = this.userProfileForm.value;
+    }
+    this.userProfileService.updateUserProfile(this.userProfile.email, userToSend).subscribe({
+      next: () => {
+        this.logout();
+        alert("Utilisateur modifié, une reconnexion est nécessaire.")
+        this.router.navigateByUrl('/login');
+      },
+      error: (error) => {
+        alert(error.error.message);
+      }
+    })
   }
 
   logout() {
-    this.tokenStrorageService.signOut();
+    this.tokenStorageService.signOut();
     this.router.navigateByUrl('/');
   }
 }
