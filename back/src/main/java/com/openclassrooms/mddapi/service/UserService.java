@@ -58,4 +58,19 @@ public class UserService implements IUserService, UserDetailsService {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
         return new LoginRequestDTO(user.getEmail(), user.getPassword(), user.getName());
     }
+
+    @Override
+    public void updateUser(String email, LoginRequestDTO loginRequestDTO) {
+    User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+        if(!user.getName().equals(loginRequestDTO.getName()) && loginRequestDTO.getName() != null) {
+            user.setName(loginRequestDTO.getName());
+        }
+        if(!user.getEmail().equals(loginRequestDTO.getEmail()) && loginRequestDTO.getEmail() != null) {
+            user.setEmail(loginRequestDTO.getEmail());
+        }
+        if(!user.getPassword().equals(loginRequestDTO.getPassword()) && loginRequestDTO.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(loginRequestDTO.getPassword()));
+        }
+        userRepository.save(user);
+    }
 }

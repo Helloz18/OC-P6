@@ -1,6 +1,10 @@
 package com.openclassrooms.mddapi.controller;
 
+import com.openclassrooms.mddapi.dto.LoginRequestDTO;
 import com.openclassrooms.mddapi.dto.UserDTO;
+import com.openclassrooms.mddapi.model.LoginRequest;
+import com.openclassrooms.mddapi.model.ResponseMessage;
+import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.security.JwtService;
 import com.openclassrooms.mddapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,14 +18,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@SecurityRequirement(name = "Bearer Authentication")
 @Tag(name = "User controller", description = "Controller used to manage a user: get, update.")
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/profile")
 public class UserController {
 
     @Autowired
@@ -30,8 +32,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @SecurityRequirement(name = "Bearer Authentication")
-    @GetMapping("/profile")
+    @GetMapping("")
     @Operation(summary = "Get information of the connected user.",
             description = "The user must be connected as we need the token in the header.")
     @ApiResponses(value = {
@@ -46,17 +47,49 @@ public class UserController {
             @Parameter(description = "Bearer token", example="Bearer eyJhbGciOJIUzI1NiJ9...")
             @RequestHeader("Authorization") String bearer) throws Exception {
         if(bearer == null) {
-            System.out.println("test");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
         } else {
             //The bearer token from the header is given with "bearer " before the actual token.
             //we remove this part to just give the token to the service.
             String email = jwtService.getEmailByToken(bearer.substring(7));
-            System.out.println("email "+email);
             UserDTO userDTO = userService.getUserDTOByEmail(email);
-            System.out.println("user DTO " + userDTO.getTopics());
             return ResponseEntity.ok(userDTO);
         }
     }
 
+    @PutMapping("/{email}")
+    @Operation(summary = "Modify the connected user: name, email and password.",
+            description = "The user must be connected as we need the token in the header.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "The user is modified in database.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class))),
+            @ApiResponse(responseCode = "400", description = "The user doesn't exist in the database.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+            })
+    public ResponseEntity<?> updateUser(
+            @Parameter(description = "Bearer token", example="Bearer eyJhbGciOJIUzI1NiJ9...")
+            @RequestHeader("Authorization") String bearer,
+            @PathVariable String email, @RequestBody LoginRequestDTO loginRequestDTO
+    ){
+        if(userService.getUserByEmail(email).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("L'utilisateur n'existe pas."));
+        } else {
+            if(bearer == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage("Invalid token."));
+            } else {
+                //The bearer token from the header is given with "bearer " before the actual token.
+                //we remove this part to just give the token to the service.
+                String emailToken = jwtService.getEmailByToken(bearer.substring(7));
+                //Verify that the token is linked to the user who wants modification
+                if(!emailToken.equals(email)){
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage("L'utilisateur utilise un token non généré par ses credentials."));
+                }
+            }
+
+            userService.updateUser(email, loginRequestDTO);
+        }
+        return ResponseEntity.ok(new ResponseMessage("User saved"));
+    }
 }
