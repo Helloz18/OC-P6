@@ -31,7 +31,6 @@
           type="password"
           formControlName="password"
           placeholder="mot de passe"
-          required
         />
       </mat-form-field>
       <mat-error
@@ -40,8 +39,8 @@
           userProfileForm.controls['password'].touched
         "
       >
-        Un password est requis.
-      </mat-error>
+      Un password de minimum 8 caractères, contenant au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial est requis.
+    </mat-error>
 
       <button
         mat-flat-button
