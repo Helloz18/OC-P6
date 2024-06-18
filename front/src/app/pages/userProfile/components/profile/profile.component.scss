@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 25px;
 }
 .column {
     display: flex;
@@ -17,7 +16,8 @@ h2 {
     font-weight: 700;
     line-height: 29.05px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
   .button_size {
     width: 139px;
@@ -40,9 +40,10 @@ h2 {
     color: #A40F0F;
 }
 hr {
-    width: 713px;
+    max-width: 713px;
 }
 .topics_list {
     display: flex;
     justify-content: center;
+    margin-top: -10px;
 }
