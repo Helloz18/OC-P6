@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
-  --customColor: #7763C5;}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  --customColor: #7763c5;
+}
 
 a {
   cursor: pointer;
@@ -10,9 +16,9 @@ a {
 .arrow_back {
   min-width: 39px;
   min-height: 39px;
-  font-size:39px;
+  font-size: 39px;
   margin: 32px 0px 0px 32px;
-  cursor:pointer;
+  cursor: pointer;
 }
 .mat-mdc-form-field-error {
   margin-top: -20px;
@@ -22,109 +28,147 @@ a {
 }
 .colored_border {
   @extend .mat-mdc-text-field-wrapper;
-  border:1px solid var(--customColor);
-    border-radius: 8px;
-    max-height: 50px;
-    margin-bottom: 24px;
+  border: 1px solid var(--customColor);
+  border-radius: 8px;
+  max-height: 50px;
+  margin-bottom: 24px;
 }
 
 //Media query for responsive design
 
 //Mobile
 @media screen and (min-width: 0px) and (max-width: 1023px) {
-    .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-    
-    .logo_full_screen {
-        margin-top:32px;
-        width: 225px;
-        height: 130px;
-      }
-      .logo_header {
-        width: 92px;
-        height: 53px;
-      }
-      
-      .toolbar_home {
-        display: none;
-      }
-      
-      .toolbar_computer {
-        display: none;
-      }
-      .mat-toolbar {
-        min-height: 62px! important;
-        background-color: white ! important;
-        border: 1px solid black;
-       }
-      .logo_header_mobile {
-        width: 225px;
-        height: 130px;
-        display: flex;
-        justify-content: center;
-      }
-      .align_button {
-        margin-top:54px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 116.5px;
-      }
-      
-.logo_user {
-  width: 48px;
-  height: 48px;
-  margin-right: 5px;
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .logo_full_screen {
+    margin-top: 32px;
+    width: 225px;
+    height: 130px;
+  }
+  .logo_header {
+    width: 92px;
+    height: 53px;
+  }
+
+  .toolbar_home {
+    display: none;
+  }
+
+  .toolbar_computer {
+    display: none;
+  }
+  .mat-toolbar {
+    min-height: 62px !important;
+    background-color: white !important;
+    border: 1px solid black;
+  }
+  .logo_header_mobile {
+    width: 225px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+  }
+  .align_button {
+    margin-top: 54px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 116.5px;
+  }
+
+  .logo_user {
+    width: 48px;
+    height: 48px;
+    margin-right: 5px;
+  }
+  .topic {
+    width: 268px;
+    height: 161px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .listOfTopics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    // max-width: 800px;
+  }
+
+  .two_items_per_row {
+    max-width: 100%;
+  }
 }
+
+//Computer
+@media only screen and (min-width: 1024px) {
+  .center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .logo_full_screen {
+    width: 412px;
+    height: 238px;
   }
 
-  //Computer
-  @media only screen and (min-width: 1024px) {
-    .center {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-    .logo_full_screen {
-        width: 412px;
-        height: 238px;
-      }
-      
-      .logo_header {
-        width: 140px;
-        height: 81px;
-      }
-
-      .logo_header_mobile{
-        display: none;
-      }
-      .toolbar_mobile {
-        display: none;
-      }
-      .mat-toolbar {
-        min-height: 94px! important;
-        background-color: white ! important;
-        border: 1px solid black;
-      }
-      .align_button {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 377px;
-      }
-      .logo_user {
-        width: 48px;
-        height: 48px;
-        margin-top: 10px;
-      }
-      .active_icon { 
-        margin-top: 2px;
-        content:url("/assets/user.png");
-      }
+  .logo_header {
+    width: 140px;
+    height: 81px;
   }
+
+  .logo_header_mobile {
+    display: none;
+  }
+  .toolbar_mobile {
+    display: none;
+  }
+  .mat-toolbar {
+    min-height: 94px !important;
+    background-color: white !important;
+    border: 1px solid black;
+  }
+  .align_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 377px;
+  }
+  .logo_user {
+    width: 48px;
+    height: 48px;
+    margin-top: 10px;
+  }
+  .active_icon {
+    margin-top: 2px;
+    content: url("/assets/user.png");
+  }
+  .topic {
+    width: 391.79px;
+    height: 161px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .listOfTopics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 800px;
+  }
+  .two_items_per_row {
+    max-width: 50%;
+  }
+}
