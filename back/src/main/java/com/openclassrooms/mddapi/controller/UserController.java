@@ -83,7 +83,7 @@ public class UserController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = String.class))),
     })
-    public ResponseEntity<?> updateUser(
+    public ResponseEntity<ResponseMessage> updateUser(
             @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
             @RequestHeader("Authorization") String bearer,
             @PathVariable String email, @RequestBody LoginRequestDTO loginRequestDTO
@@ -118,5 +118,11 @@ public class UserController {
             }
         }
         return ResponseEntity.ok(new ResponseMessage("User modifié et enregistré en base de données."));
+    }
+
+    @PutMapping("/topic/{topicId}")
+    public ResponseEntity<ResponseMessage> modifyUserSubscriptions(
+            @PathVariable Long topicId, @RequestParam String email) {
+        return ResponseEntity.ok(new ResponseMessage("Liste des sujets modifiées pour l'utilisateur."));
     }
 }
