@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TopicListComponent } from 'src/app/pages/topics/components/topic-list/topic-list.component';
 import { Topic } from 'src/app/pages/topics/interfaces/topic';
+import { TokenStorageService } from 'src/app/pages/auth/services/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +24,7 @@ export class ProfileComponent implements OnInit {
   userTopics: Topic[] = [];
   userProfileForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private userProfileService: UserProfileService) {
+  constructor(private fb: FormBuilder, private userProfileService: UserProfileService, private tokenStrorageService: TokenStorageService, private router: Router) {
     this.userProfileForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -58,5 +60,8 @@ export class ProfileComponent implements OnInit {
     console.log(this.userProfileForm)
   }
 
-
+  logout() {
+    this.tokenStrorageService.signOut();
+    this.router.navigateByUrl('/');
+  }
 }
