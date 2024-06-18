@@ -2,6 +2,11 @@ package com.openclassrooms.mddapi.security;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.openclassrooms.mddapi.service.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +28,25 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.crypto.spec.SecretKeySpec;
 
+
 @Configuration
+@OpenAPIDefinition(
+        info =@Info(
+                title = "${spring.application.name}",
+                version = "${api.version}",
+                description = "${api.description}"
+        ),
+        servers = @Server(
+                url = "${api.server.url}",
+                description = "${api.server.description}"
+        )
+)
+@SecurityScheme(
+        name = "Bearer Authentication",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 public class SecurityConfig {
 
     @Value("${jwt.secret}")

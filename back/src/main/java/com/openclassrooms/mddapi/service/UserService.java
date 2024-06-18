@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.LoginRequestDTO;
 import com.openclassrooms.mddapi.dto.UserDTO;
-import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,15 +30,25 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public void save(UserDTO userDTO) throws Exception {
-        log.info("Save UserDTO: " + userDTO.getEmail());
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
-            throw new Exception("The email provided may be registered already: " + userDTO.getEmail());
+    public UserDTO getUserDTOByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(email);
+        userDTO.setName(user.getName());
+        userDTO.setTopics(user.getTopics());
+        return userDTO;
+    }
+
+    @Override
+    public void save(LoginRequestDTO loginRequestDTO) throws Exception {
+        log.info("Save new user: " + loginRequestDTO.getEmail());
+        if (userRepository.findByEmail(loginRequestDTO.getEmail()).isPresent()) {
+            throw new Exception("The email provided may be registered already: " + loginRequestDTO.getEmail());
         } else {
             User user = new User();
-            user.setName(userDTO.getName());
-            user.setEmail(userDTO.getEmail());
-            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setName(loginRequestDTO.getName());
+            user.setEmail(loginRequestDTO.getEmail());
+            user.setPassword(passwordEncoder.encode(loginRequestDTO.getPassword()));
             userRepository.save(user);
         }
     }
@@ -46,6 +56,6 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
-        return new UserDTO(user.getEmail(), user.getPassword(), user.getName());
+        return new LoginRequestDTO(user.getEmail(), user.getPassword(), user.getName());
     }
 }

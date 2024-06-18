@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 
+import com.openclassrooms.mddapi.dto.LoginRequestDTO;
 import com.openclassrooms.mddapi.dto.UserDTO;
 import com.openclassrooms.mddapi.model.User;
 
@@ -10,5 +11,7 @@ public interface IUserService {
 
     Optional<User> getUserByEmail(String email);
 
-    void save(UserDTO userDTO) throws Exception;
+    UserDTO getUserDTOByEmail(String email);
+
+    void save(LoginRequestDTO loginRequestDTO) throws Exception;
 }

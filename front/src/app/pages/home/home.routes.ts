@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { TopicComponent } from '../topic/topic.component';
 
 /**
  * In the HomeComponent, we can navigate to the routes defined in CORE_ROUTES
