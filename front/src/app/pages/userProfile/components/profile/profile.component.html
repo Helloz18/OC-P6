@@ -59,4 +59,5 @@
 </div>
 <hr>
 <h2>Abonnements</h2>
-<app-topic-list class="topics_list" [userTopics]="userTopics"></app-topic-list>
+<app-topic-list class="topics_list" [user]="userProfile"
+(topicListUpdated)="updateTopic($event)"></app-topic-list>

@@ -1,3 +1,9 @@
-<div class="listOfTopics">
-<app-topic *ngFor="let topic of userTopics" [topic]="topic" class="two_items_per_row"></app-topic>
+<div class="listOfTopics" *ngIf="user">
+<app-topic 
+    *ngFor="let topic of user.topics" 
+    [email]="user.email" 
+    [topic]="topic" 
+    class="two_items_per_row"
+    (updateTopicList)="topicUpdated(topic.id!)"
+    ></app-topic>
 </div>

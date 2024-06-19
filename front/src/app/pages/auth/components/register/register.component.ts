@@ -40,8 +40,7 @@ export class RegisterComponent {
           }
         },
         error: (e) => {
-          alert(e.error.message)
-          console.log(e);
+          alert(e.error.message);
         }
       })
     }

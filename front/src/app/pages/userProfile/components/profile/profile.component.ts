@@ -81,4 +81,15 @@ export class ProfileComponent implements OnInit {
     this.tokenStorageService.signOut();
     this.router.navigateByUrl('/');
   }
+
+  /**
+   * This method is called when a user unsubscribe to a topic, 
+   * the list of subscriptions is updated
+   * @param topicId 
+   */
+  updateTopic(topicId:number) {
+    let topic = this.userProfile.topics?.find(t => t.id === topicId );
+    const index = this.userProfile.topics?.indexOf(topic!); 
+    this.userProfile.topics?.splice(index!, 1);
+  }
 }

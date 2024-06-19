@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { Topic } from '../../interfaces/topic';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopicComponent } from '../topic/topic.component';
 import { TopicService } from '../../services/topic.service';
+import { UserProfile } from 'src/app/pages/userProfile/interfaces/user-profile';
 
 @Component({
   selector: 'app-topic-list',
@@ -14,19 +14,20 @@ import { TopicService } from '../../services/topic.service';
 export class TopicListComponent {
 
   @Input()
-  userTopics: Topic[] | undefined = [];
+  user!: UserProfile;
+
+  @Output()
+  topicListUpdated = new EventEmitter<number>();
 
   //topics: Topic[] = [];
 
   constructor(private topicService: TopicService) {}
 
   ngOnInit(): void {
-    console.log("in topic list ngOnInit()");
-    // this.topicService.getAll().subscribe({
-    //   next: (data) => {
-    //     this.topics = data;
-    //   }
-    // })
+  }
+
+  topicUpdated(topicId: number) {
+    this.topicListUpdated.emit(topicId);
   }
 
 }
