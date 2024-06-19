@@ -2,11 +2,11 @@ package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.LoginRequestDTO;
 import com.openclassrooms.mddapi.dto.UserDTO;
-import com.openclassrooms.mddapi.model.LoginRequest;
 import com.openclassrooms.mddapi.model.ResponseMessage;
-import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.security.JwtService;
-import com.openclassrooms.mddapi.service.UserService;
+import com.openclassrooms.mddapi.service.ITopicService;
+import com.openclassrooms.mddapi.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,12 +27,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    JwtService
-            jwtService;
+    JwtService jwtService;
 
     @Autowired
-    UserService
-            userService;
+    IUserService userService;
+
+    @Autowired
+    ITopicService topicService;
 
     @GetMapping("")
     @Operation(summary = "Get information of the connected user.",
@@ -47,7 +48,7 @@ public class UserController {
     })
     public ResponseEntity<?> getConnectedUser(
             @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
-            @RequestHeader("Authorization") String bearer) throws Exception {
+            @RequestHeader("Authorization") String bearer) {
         if (bearer == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
         } else {
@@ -70,7 +71,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "The user is modified in database.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class))),
-            @ApiResponse(responseCode = "400", description = "The user doesn't exist in the database.",
+            @ApiResponse(responseCode = "404", description = "The user doesn't exist in the database.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "401", description = "Invalid token.",
@@ -121,8 +122,30 @@ public class UserController {
     }
 
     @PutMapping("/topic/{topicId}")
+    @Operation(summary = "Modify the subscriptions of the user.",
+            description = "The Id of the topic and the email of the user are mandatory.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "The subscription is added or removed.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class))),
+            @ApiResponse(responseCode = "404", description = "The topic doesn't exist in the database.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class))),
+    })
     public ResponseEntity<ResponseMessage> modifyUserSubscriptions(
-            @PathVariable Long topicId, @RequestParam String email) {
-        return ResponseEntity.ok(new ResponseMessage("Liste des sujets modifiées pour l'utilisateur."));
+            @PathVariable Long topicId, @RequestParam String email) throws Exception {
+        try {
+            topicService.findTopicById(topicId); }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseMessage(e.getMessage()));
+        }
+            Topic
+                    topic =
+                    topicService.findTopicById(topicId);
+            String
+                    message =
+                    userService.modifySubscription(topic, email);
+            return ResponseEntity.ok(new ResponseMessage(message));
     }
 }
