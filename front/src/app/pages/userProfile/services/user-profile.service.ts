@@ -27,4 +27,8 @@ export class UserProfileService {
   updateUserProfile(email: string, modifiedUser:LoginRequest) {
     return this.http.put(BACKEND_URL +"/"+ email, modifiedUser);
   }
+
+  modifySubscription(topicId: number, email: string) {
+    return this.http.put(BACKEND_URL+"/topic/"+topicId+"?email=", email);
+  }
 }
