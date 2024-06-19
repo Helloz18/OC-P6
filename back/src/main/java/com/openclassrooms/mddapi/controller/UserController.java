@@ -128,14 +128,19 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "The subscription is added or removed.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class))),
-            @ApiResponse(responseCode = "404", description = "The topic doesn't exist in the database.",
+            @ApiResponse(responseCode = "404", description = "The user or the topic doesn't exist in the database.",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ResponseMessage.class))),
+                            schema = @Schema(implementation = ResponseMessage.class)))
     })
     public ResponseEntity<ResponseMessage> modifyUserSubscriptions(
             @PathVariable Long topicId, @RequestParam String email) throws Exception {
+        if (userService.getUserByEmail(email).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseMessage("L'utilisateur n'existe pas."));
+        }
         try {
-            topicService.findTopicById(topicId); }
+            topicService.findTopicById(topicId);
+        }
         catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ResponseMessage(e.getMessage()));
