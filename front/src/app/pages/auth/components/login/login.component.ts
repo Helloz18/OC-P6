@@ -33,10 +33,9 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (data) => {
-          console.log("ok");
           if (data.type == HttpEventType.Response) {
             this.tokenStorage.saveToken(data.body.token);
-            this.router.navigateByUrl('/topics');
+            this.router.navigateByUrl('/posts');
           }
         },
         error: (e) => {
