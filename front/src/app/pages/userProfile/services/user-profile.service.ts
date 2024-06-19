@@ -29,6 +29,6 @@ export class UserProfileService {
   }
 
   modifySubscription(topicId: number, email: string) {
-    return this.http.put(BACKEND_URL+"/topic/"+topicId+"?email=", email);
+    return this.http.put(BACKEND_URL+"/topic/"+topicId+"?email="+email, {});
   }
 }
