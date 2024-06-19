@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.LoginRequestDTO;
 import com.openclassrooms.mddapi.dto.UserDTO;
+import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -72,5 +73,21 @@ public class UserService implements IUserService, UserDetailsService {
             user.setPassword(passwordEncoder.encode(loginRequestDTO.getPassword()));
         }
         userRepository.save(user);
+    }
+
+    @Override
+    public String modifySubscription(Topic topic, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+
+        boolean isTopicInUserTopics = user.getTopics().stream().anyMatch(t -> t.getId() == topic.getId());
+        if(isTopicInUserTopics) {
+            user.getTopics().remove(topic);
+            userRepository.save(user);
+            return "Sujet "+topic.getName()+" enlevé des abonnements.";
+        } else {
+            user.getTopics().add(topic);
+            userRepository.save(user);
+            return "Sujet "+topic.getName()+" ajouté aux abonnements.";
+        }
     }
 }
