@@ -26,14 +26,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/profile")
 public class UserController {
 
-    @Autowired
-    JwtService jwtService;
+    private JwtService jwtService;
+    private IUserService userService;
+    private ITopicService topicService;
 
-    @Autowired
-    IUserService userService;
-
-    @Autowired
-    ITopicService topicService;
+    public UserController(JwtService jwtService, IUserService userService, ITopicService topicService) {
+        this.jwtService = jwtService;
+        this.userService = userService;
+        this.topicService = topicService;
+    }
 
     @GetMapping("")
     @Operation(summary = "Get information of the connected user.",
@@ -122,35 +123,30 @@ public class UserController {
     }
 
     @PutMapping("/topic/{topicId}")
-    @Operation(summary = "Modify the subscriptions of the user.",
+    @Operation(summary = "Unsubscribe to a subscription.",
             description = "The Id of the topic and the email of the user are mandatory.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "The subscription is added or removed.",
+            @ApiResponse(responseCode = "200", description = "The subscription is removed.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class))),
             @ApiResponse(responseCode = "404", description = "The user or the topic doesn't exist in the database.",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ResponseMessage.class)))
     })
-    public ResponseEntity<ResponseMessage> modifyUserSubscriptions(
+    public ResponseEntity<ResponseMessage> unsubscribe(
             @PathVariable Long topicId, @RequestParam String email) throws Exception {
         if (userService.getUserByEmail(email).isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ResponseMessage("L'utilisateur n'existe pas."));
         }
         try {
-            topicService.findTopicById(topicId);
+            Topic topic = topicService.findTopicById(topicId);
+            String message = userService.unsubscribe(topic, email);
+            return ResponseEntity.ok(new ResponseMessage(message));
         }
         catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ResponseMessage(e.getMessage()));
         }
-            Topic
-                    topic =
-                    topicService.findTopicById(topicId);
-            String
-                    message =
-                    userService.modifySubscription(topic, email);
-            return ResponseEntity.ok(new ResponseMessage(message));
     }
 }

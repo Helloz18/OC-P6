@@ -1,5 +1,6 @@
 <div class="topic">
     <div class="topic_title">{{topic.name}}</div>
     <div class="topic_description">{{topic.description}}</div>
-    <button mat-flat-button class="button_size" (click)="unsubscribe(topic.id!)">Se désabonner</button>
+    <button *ngIf="forProfile" mat-flat-button class="button_size" (click)="unsubscribe(topic.id!)">Se désabonner</button>
+    <button *ngIf="!forProfile" mat-flat-button class="button_size" (click)="subscribe(topic.id!)">S'abonner</button>
 </div>

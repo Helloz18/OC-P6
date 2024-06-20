@@ -76,7 +76,7 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public String modifySubscription(Topic topic, String email) {
+    public String unsubscribe(Topic topic, String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
 
         boolean isTopicInUserTopics = user.getTopics().stream().anyMatch(t -> t.getId() == topic.getId());
@@ -85,9 +85,21 @@ public class UserService implements IUserService, UserDetailsService {
             userRepository.save(user);
             return "Sujet "+topic.getName()+" enlevé des abonnements.";
         } else {
+            return("Sujet "+topic.getName()+" ne fait pas partie des abonnements de l'utilisateur "+email+".");
+        }
+    }
+
+    @Override
+    public String subscribe(Topic topic, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+
+        boolean isTopicInUserTopics = user.getTopics().stream().anyMatch(t -> t.getId() == topic.getId());
+        if(!isTopicInUserTopics) {
             user.getTopics().add(topic);
             userRepository.save(user);
             return "Sujet "+topic.getName()+" ajouté aux abonnements.";
+        } else {
+            return("Sujet "+topic.getName()+" fait déjà partie des abonnements de l'utilisateur "+email+".");
         }
     }
 }
