@@ -17,6 +17,8 @@ export class TopicComponent {
   topic!: Topic;
   @Input()
   email!: string;
+  @Input()
+  forProfile!: boolean;
 
   @Output() 
   updateTopicList = new EventEmitter<number>();
@@ -35,5 +37,15 @@ export class TopicComponent {
         alert(error.error.message);
       }
     })
+  }
+
+  subscribe(topicId: number) {
+    // TODO on créé un nouvelle méthode dans le back
+    // utilise le header et le token pour récupérer le user --> oui
+    // ou alors on stocke au log in l'email dans la session et on le récupère --> non
+    // problème pour le moment, si le user est déjà abonné alors il sera désabonné avec ma méthode
+    // donc il faut que je fasse deux méthodes dans le back. 
+    // --> plus logique pour la séparation des responsabilités
+
   }
 }
