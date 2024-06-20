@@ -7,12 +7,14 @@ import { TopicService } from 'src/app/pages/topics/services/topic.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-add-post',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule],
   templateUrl: './add-post.component.html',
   styleUrl: './add-post.component.scss'
 })
@@ -22,7 +24,7 @@ export class AddPostComponent implements OnInit {
 
   topics: Topic[] = [];
 
-  constructor(private fb: FormBuilder, private topicService: TopicService) {
+  constructor(private fb: FormBuilder, private topicService: TopicService, private router: Router) {
     this.postForm = this.fb.group({
       topic: [''],
       title: [''],
@@ -52,4 +54,7 @@ export class AddPostComponent implements OnInit {
     console.log(this.postForm);
   }
 
+  previous() {
+    this.router.navigateByUrl('/posts');
+  }
 }
