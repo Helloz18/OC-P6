@@ -28,7 +28,7 @@ export class UserProfileService {
     return this.http.put(BACKEND_URL +"/"+ email, modifiedUser);
   }
 
-  modifySubscription(topicId: number, email: string) {
+  unsubscribe(topicId: number, email: string) {
     return this.http.put(BACKEND_URL+"/topic/"+topicId+"?email="+email, {});
   }
 }
