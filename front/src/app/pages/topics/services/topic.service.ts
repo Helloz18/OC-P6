@@ -1,6 +1,7 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { Topic } from '../interfaces/topic';
 
 const BACKEND_URL= environment.backendUrl + "/topic"
 
@@ -12,6 +13,6 @@ export class TopicService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<any>(BACKEND_URL);
+    return this.http.get<Topic[]>(BACKEND_URL);
   }
 }
