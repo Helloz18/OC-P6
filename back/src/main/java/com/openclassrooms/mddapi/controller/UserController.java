@@ -26,14 +26,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/profile")
 public class UserController {
 
-    @Autowired
-    JwtService jwtService;
+    private JwtService jwtService;
+    private IUserService userService;
+    private ITopicService topicService;
 
-    @Autowired
-    IUserService userService;
-
-    @Autowired
-    ITopicService topicService;
+    public UserController(JwtService jwtService, IUserService userService, ITopicService topicService) {
+        this.jwtService = jwtService;
+        this.userService = userService;
+        this.topicService = topicService;
+    }
 
     @GetMapping("")
     @Operation(summary = "Get information of the connected user.",
