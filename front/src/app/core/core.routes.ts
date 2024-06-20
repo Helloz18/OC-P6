@@ -6,6 +6,7 @@ import { PostListComponent } from '../pages/posts/components/post-list/post-list
 import { ProfileComponent } from '../pages/userProfile/components/profile/profile.component';
 import { TopicListComponent } from '../pages/topics/components/topic-list/topic-list.component';
 import { authGuard } from './guards/auth.guard';
+import { AddPostComponent } from '../pages/posts/components/add-post/add-post.component';
 
 /**
  * ShellComponent will contain the header that will be displayed on every pages of the application
@@ -18,7 +19,7 @@ export const CORE_ROUTES: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'topics', component: TopicListComponent, canActivate: [authGuard] },
-      { path: 'posts', component: PostListComponent, canActivate: [authGuard] },
+      { path: 'posts',  loadChildren: () => import('../pages/posts/posts.routes').then(r => r.POSTS_ROUTES)},
       { path: 'profile', component: ProfileComponent, canActivate: [authGuard] }
     ],
   },

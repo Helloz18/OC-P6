@@ -11,7 +11,7 @@
 <h2>Inscription</h2>
   <div class="column">
     <span class="label">Nom d'utilisateur</span>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="outline">
     <input matInput formControlName="name" required>
   </mat-form-field>
   <mat-error *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched">
@@ -19,7 +19,7 @@
   </mat-error>
 
   <span class="label">Adresse e-mail</span>
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" class="outline">
   <input matInput type="email" formControlName="email" required>
 </mat-form-field>
 <mat-error *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
@@ -28,7 +28,7 @@
 
 
 <span class="label">Mot de passe</span>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="outline">
     <input matInput type="password" formControlName="password" required>
   </mat-form-field>
   <mat-error *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
