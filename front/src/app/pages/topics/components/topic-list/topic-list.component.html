@@ -9,10 +9,12 @@
     ></app-topic>
 </div>
 
-<div class="listOfTopics" *ngIf="!comesFromProfile && allTopics">
+<div class="topics_list" *ngIf="!comesFromProfile && allTopics">
+<div class="listOfTopics">
     <app-topic
         *ngFor="let topic of allTopics"
         [topic]="topic" 
         class="two_items_per_row"
     ></app-topic>
+</div>
 </div>
