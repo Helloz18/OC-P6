@@ -15,4 +15,8 @@ export class TopicService {
   getAll() {
     return this.http.get<Topic[]>(BACKEND_URL);
   }
+
+  subscribe(topicId: number) {
+    return this.http.put(BACKEND_URL+"/"+topicId, {});
+  }
 }
