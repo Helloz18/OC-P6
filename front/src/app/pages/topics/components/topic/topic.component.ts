@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Topic } from "../../interfaces/topic";
 import { MatButtonModule } from "@angular/material/button";
 import { UserProfileService } from "src/app/pages/userProfile/services/user-profile.service";
+import { TopicService } from "../../services/topic.service";
 
 @Component({
   selector: 'app-topic',
@@ -23,7 +24,7 @@ export class TopicComponent {
   @Output() 
   updateTopicList = new EventEmitter<number>();
 
-  constructor(private userProfileService: UserProfileService) {}
+  constructor(private userProfileService: UserProfileService, private topicService: TopicService) {}
 
   unsubscribe(topicId: number){
     console.log("email:"+ this.email)
@@ -40,12 +41,14 @@ export class TopicComponent {
   }
 
   subscribe(topicId: number) {
-    // TODO on créé un nouvelle méthode dans le back
-    // utilise le header et le token pour récupérer le user --> oui
-    // ou alors on stocke au log in l'email dans la session et on le récupère --> non
-    // problème pour le moment, si le user est déjà abonné alors il sera désabonné avec ma méthode
-    // donc il faut que je fasse deux méthodes dans le back. 
-    // --> plus logique pour la séparation des responsabilités
-
+    this.topicService.subscribe(topicId).subscribe({
+      next: (data) => {
+        let message = JSON.parse(JSON.stringify(data)).message;
+        alert(message);
+      },
+      error: (error) => {
+        alert(error.error.message);
+      }
+    })
   }
 }
