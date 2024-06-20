@@ -20,11 +20,16 @@ a {
   margin: 32px 0px 0px 32px;
   cursor: pointer;
 }
+.mdc-text-field {
+  position: static !important;
+}
 .mat-mdc-form-field-error {
   margin-top: -20px;
 }
 .mat-mdc-text-field-wrapper {
   min-height: 50px;
+  max-height: 50px;
+  margin-bottom: 20px;
 }
 .colored_border {
   @extend .mat-mdc-text-field-wrapper;
