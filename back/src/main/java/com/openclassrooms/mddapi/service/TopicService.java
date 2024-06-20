@@ -23,7 +23,6 @@ public class TopicService implements ITopicService {
 				.orElseThrow(() -> new NoSuchElementException("Le topic n'existe pas."));
 	}
 
-
 	@Override
 	public List<Topic> getTopics() {
 		return topicRepository.findAll();
