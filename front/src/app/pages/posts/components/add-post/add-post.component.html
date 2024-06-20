@@ -6,7 +6,7 @@
     <div class="column" *ngIf="topics">
         <mat-select matSelect formControlName="topic" required class="colored_border createWidth" placeholder="Sélectionner un thème">
           @for (t of topics; track t) {
-          <mat-option matOption [value]="t.name">{{ t.name }}</mat-option>
+          <mat-option matOption [value]="t">{{ t.name }}</mat-option>
           }
         </mat-select>
       <mat-form-field appearance="outline" class="colored_border createWidth">
