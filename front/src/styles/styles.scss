@@ -41,10 +41,9 @@ a {
 .mat-mdc-form-field-subscript-wrapper {
   height: 0px !important;
 }
-.mat-mdc-select-placeholder {
-  position: fixed;
-  margin-top: -5px;
-  margin-left: 15px;
+
+.mat-mdc-select-trigger {
+  margin: 15px;
 }
 
 //Media query for responsive design

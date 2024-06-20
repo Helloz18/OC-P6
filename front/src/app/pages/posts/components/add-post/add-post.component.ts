@@ -51,7 +51,8 @@ export class AddPostComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.postForm);
+    console.log(this.postForm.value);
+    
   }
 
   previous() {
