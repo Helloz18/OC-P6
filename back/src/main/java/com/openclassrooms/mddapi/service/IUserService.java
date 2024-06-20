@@ -18,5 +18,7 @@ public interface IUserService {
 
     void updateUser(String email, LoginRequestDTO loginRequestDTO);
 
-    String modifySubscription(Topic topic, String email);
+    String unsubscribe(Topic topic, String email);
+
+    String subscribe(Topic topic, String email);
 }
