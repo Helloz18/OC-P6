@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { PostService } from '../../services/post.service';
+import { PostDTO } from '../../interfaces/post-dto';
 
 
 @Component({
@@ -24,9 +26,9 @@ export class AddPostComponent implements OnInit {
 
   topics: Topic[] = [];
 
-  constructor(private fb: FormBuilder, private topicService: TopicService, private router: Router) {
+  constructor(private fb: FormBuilder, private topicService: TopicService, private router: Router, private postService: PostService) {
     this.postForm = this.fb.group({
-      topic: [''],
+      topicId: [''],
       title: [''],
       content: ['']
     })
@@ -52,7 +54,17 @@ export class AddPostComponent implements OnInit {
 
   onSubmit() {
     console.log(this.postForm.value);
-    
+    let postDTO: PostDTO = this.postForm.value;
+    this.postService.savePost(postDTO).subscribe({
+      next: () => {
+        alert("Article enregistré.");
+        this.router.navigateByUrl('/posts');
+      },
+      error: (error) => {
+        alert(error.error.message);
+      }
+    })
+
   }
 
   previous() {

@@ -4,7 +4,7 @@
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <h2>Créer un nouvel article</h2>
     <div class="column" *ngIf="topics">
-        <mat-select matSelect formControlName="topic" required class="colored_border createWidth" placeholder="Sélectionner un thème">
+        <mat-select matSelect formControlName="topicId" required class="colored_border createWidth" placeholder="Sélectionner un thème">
           @for (t of topics; track t) {
           <mat-option matOption [value]="t.id">{{ t.name }}</mat-option>
           }
