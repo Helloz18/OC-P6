@@ -1,12 +1,55 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Topic } from 'src/app/pages/topics/interfaces/topic';
+import { TopicService } from 'src/app/pages/topics/services/topic.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @Component({
   selector: 'app-add-post',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
   templateUrl: './add-post.component.html',
   styleUrl: './add-post.component.scss'
 })
-export class AddPostComponent {
+export class AddPostComponent implements OnInit {
+
+  postForm!: FormGroup;
+
+  topics: Topic[] = [];
+
+  constructor(private fb: FormBuilder, private topicService: TopicService) {
+    this.postForm = this.fb.group({
+      topic: [''],
+      title: [''],
+      content: ['']
+    })
+  }
+  ngOnInit(): void {
+    this.getAllTopics();
+  }
+
+  getAllTopics() {
+    this.topicService.getAll().subscribe({
+      next: (topics) => {
+        this.topics = topics;
+      },
+      error: (error) => {
+        alert(error.error.message);
+      }
+    })
+  }
+
+  changeTopic(event: Event) {
+    console.log(event);
+  }
+
+  onSubmit() {
+    console.log(this.postForm);
+  }
 
 }
