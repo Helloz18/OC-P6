@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.dto.PostDTO;
+import com.openclassrooms.mddapi.dto.PostCreateDTO;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -51,7 +51,7 @@ public class PostController {
     public ResponseEntity<?> createPost(
             @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
             @RequestHeader("Authorization") String bearer,
-            @RequestBody PostDTO postDTO
+            @RequestBody PostCreateDTO postCreateDTO
     ){
         String emailToken = jwtService.getEmailByToken(bearer.substring(7));
         try {
@@ -59,9 +59,9 @@ public class PostController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(new ResponseMessage("L'utilisateur n'existe pas."));
             }
-            Topic topic = topicService.findTopicById(postDTO.getTopicId());
+            Topic topic = topicService.findTopicById(postCreateDTO.getTopicId());
             User user = userService.getUserByEmail(emailToken).orElseThrow();
-            postService.savePost(user, topic, postDTO);
+            postService.savePost(user, topic, postCreateDTO);
             return ResponseEntity.ok().body(new ResponseMessage("Artile créé avec succès"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
