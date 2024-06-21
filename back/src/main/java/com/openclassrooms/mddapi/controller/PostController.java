@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
-import com.openclassrooms.mddapi.dto.PostListDTO;
+import com.openclassrooms.mddapi.dto.PostForListDTO;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -78,7 +78,7 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of PostListDTO",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = PostListDTO.class)))
+                            schema = @Schema(implementation = PostForListDTO.class)))
     })
     public ResponseEntity<?> getPosts(@Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
                            @RequestHeader("Authorization") String bearer
@@ -93,7 +93,7 @@ public class PostController {
                 User
                         user =
                         userService.getUserByEmail(emailToken).orElseThrow();
-                List<PostListDTO>
+                List<PostForListDTO>
                         posts =
                         postService.getPosts(user);
                 return ResponseEntity.ok().body(posts);

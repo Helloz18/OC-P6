@@ -2,7 +2,7 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
 import com.openclassrooms.mddapi.dto.PostDTO;
-import com.openclassrooms.mddapi.dto.PostListDTO;
+import com.openclassrooms.mddapi.dto.PostForListDTO;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -37,24 +37,23 @@ public class PostService implements IPostService {
 	}
 
 	@Override
-	public List<PostListDTO> getPosts(User user) {
-		List<PostListDTO> posts = new ArrayList<>();
-		List<List<Post>> listPosts = new ArrayList<>();
+	public List<PostForListDTO> getPosts(User user) {
+		List<PostForListDTO>
+				listOfPostForListDTO = new ArrayList<>();
 		for(Topic t : user.getTopics()) {
-			listPosts.add(postRepository.findByTopic_id(t.getId()));
-		}
-		for(List<Post> pp : listPosts) {
-			for(Post p : pp) {
-				PostListDTO po = new PostListDTO();
-				po.setId(p.getId());
-				po.setTitle(p.getTitle());
-				po.setContent(p.getContent());
-				po.setCreatedAt(p.getCreatedAt());
-				po.setAuthor(p.getUser().getName());
-				posts.add(po);
+			List<Post> posts = postRepository.findByTopic_id(t.getId());
+			for(Post p : posts) {
+				PostForListDTO
+						postForListDTO = new PostForListDTO();
+				postForListDTO.setId(p.getId());
+				postForListDTO.setTitle(p.getTitle());
+				postForListDTO.setContent(p.getContent());
+				postForListDTO.setCreatedAt(p.getCreatedAt());
+				postForListDTO.setAuthor(p.getUser().getName());
+				listOfPostForListDTO.add(postForListDTO);
 			}
 		}
-		return posts;
+		return listOfPostForListDTO;
 	}
 
 	@Override

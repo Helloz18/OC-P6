@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PostListDTO {
+public class PostForListDTO {
 
     private Long id;
     private String title;
