@@ -1,1 +1,2 @@
 <button mat-button class="button_size" (click)="createPost()">Créer un article</button>
+<app-post *ngFor="let post of listOfPosts" [post]="post"></app-post>

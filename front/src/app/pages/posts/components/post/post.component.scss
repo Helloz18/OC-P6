@@ -1,0 +1,30 @@
+.post {
+    width: 350px;
+    height:180px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.36px;
+    text-align: left;
+    padding: 10px;
+}
+.basicText {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+    text-align: left;
+    padding: 15px;
+}
+.content {
+    overflow: hidden;
+}
+.author {
+    justify-self: center;
+}
