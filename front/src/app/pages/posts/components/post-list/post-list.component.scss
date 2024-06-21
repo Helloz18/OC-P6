@@ -6,4 +6,12 @@
     border-radius: 8px;
     font-family: Inter;
     font-weight: 700;
+    margin: 20px;
+}
+.displayList {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left:20px;
+    margin-right: 20px;
 }

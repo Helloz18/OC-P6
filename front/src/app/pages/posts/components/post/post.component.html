@@ -1,1 +1,10 @@
-<p>post works!</p>
+<div class="post">
+    <div class="title">{{post.title}}</div>
+    <div class="basicText">
+        <span>{{post.createdAt | date: 'dd/MM/yyyy'}}</span>
+        <span class="author"> {{post.author}}</span>
+    </div>
+    <div class="basicText content">
+        {{post.content}}
+    </div>
+</div>
