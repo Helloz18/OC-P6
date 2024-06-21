@@ -12,7 +12,6 @@ import java.util.List;
 @Table(name = "posts")
 @Getter
 @Setter
-@ToString
 public class Post {
 
 	@Id

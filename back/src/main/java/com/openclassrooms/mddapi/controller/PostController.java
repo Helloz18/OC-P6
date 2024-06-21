@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
+import com.openclassrooms.mddapi.dto.PostListDTO;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -19,6 +20,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
@@ -53,8 +56,8 @@ public class PostController {
             @RequestHeader("Authorization") String bearer,
             @RequestBody PostCreateDTO postCreateDTO
     ){
-        String emailToken = jwtService.getEmailByToken(bearer.substring(7));
         try {
+            String emailToken = jwtService.getEmailByToken(bearer.substring(7));
             if (userService.getUserByEmail(emailToken).isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(new ResponseMessage("L'utilisateur n'existe pas."));
@@ -67,5 +70,33 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ResponseMessage(e.getMessage()));
         }
+    }
+
+    @GetMapping("")
+    @Operation(summary = "Get the list of posts from the user subscription.",
+            description = "According to the user subscriptions, retrieve all posts from this topics.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of PostListDTO",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PostListDTO.class)))
+    })
+    public ResponseEntity<?> getPosts(@Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
+                           @RequestHeader("Authorization") String bearer
+                       ) {
+            String
+                    emailToken =
+                    jwtService.getEmailByToken(bearer.substring(7));
+            if (userService.getUserByEmail(emailToken).isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseMessage("L'utilisateur n'existe pas."));
+            } else {
+                User
+                        user =
+                        userService.getUserByEmail(emailToken).orElseThrow();
+                List<PostListDTO>
+                        posts =
+                        postService.getPosts(user);
+                return ResponseEntity.ok().body(posts);
+            }
     }
 }

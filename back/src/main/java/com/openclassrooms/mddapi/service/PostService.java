@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
+import com.openclassrooms.mddapi.dto.PostDTO;
+import com.openclassrooms.mddapi.dto.PostListDTO;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -8,6 +10,8 @@ import com.openclassrooms.mddapi.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostService implements IPostService {
@@ -30,5 +34,32 @@ public class PostService implements IPostService {
 		post.setCreatedAt(String.valueOf(Instant.now()));
 		post.setUser(user);
 		postRepository.save(post);
+	}
+
+	@Override
+	public List<PostListDTO> getPosts(User user) {
+		List<PostListDTO> posts = new ArrayList<>();
+		List<List<Post>> listPosts = new ArrayList<>();
+		for(Topic t : user.getTopics()) {
+			listPosts.add(postRepository.findByTopic_id(t.getId()));
+		}
+		for(List<Post> pp : listPosts) {
+			for(Post p : pp) {
+				PostListDTO po = new PostListDTO();
+				po.setId(p.getId());
+				po.setTitle(p.getTitle());
+				po.setContent(p.getContent());
+				po.setCreatedAt(p.getCreatedAt());
+				po.setAuthor(p.getUser().getName());
+				posts.add(po);
+			}
+		}
+		return posts;
+	}
+
+	@Override
+	public PostDTO getPostById(Long postId) {
+		PostDTO post = new PostDTO();
+		return post;
 	}
 }
