@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
+import com.openclassrooms.mddapi.dto.PostDTO;
 import com.openclassrooms.mddapi.dto.PostForListDTO;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
@@ -98,5 +99,12 @@ public class PostController {
                         postService.getPosts(user);
                 return ResponseEntity.ok().body(posts);
             }
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<?> getPostDTO(@PathVariable Long postId) {
+        PostDTO
+                postDTO = postService.getPostById(postId);
+        return ResponseEntity.ok().body(postDTO);
     }
 }
