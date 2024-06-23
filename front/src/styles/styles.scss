@@ -13,13 +13,7 @@ body {
 a {
   cursor: pointer;
 }
-.arrow_back {
-  min-width: 39px;
-  min-height: 39px;
-  font-size: 39px;
-  margin: 32px 0px 0px 32px;
-  cursor: pointer;
-}
+
 .mdc-text-field {
   position: static !important;
 }
@@ -46,13 +40,21 @@ a {
   margin: 15px;
 }
 
-hr {
-  max-width: 713px;
-}
+
 //Media query for responsive design
 
 //Mobile
-@media screen and (min-width: 0px) and (max-width: 1023px) {
+@media screen and (min-width: 0px) and (max-width: 834px) {
+  .arrow_back {
+    min-width: 39px;
+    min-height: 39px;
+    font-size: 39px;
+    margin: 32px 0px 0px 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+  }
   .center {
     display: flex;
     justify-content: center;
@@ -134,10 +136,59 @@ hr {
   width: 250px;
   height: 212px;
 }
+.comment {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: baseline;
+  justify-content: right;
+}
+.comment_author {
+  align-self: flex-end;
+  margin-right: 20px;
+}
+.comment_content {
+  width: 232px;
+  //background-color: #EEEEEE;
+  //border-radius: 8px;
+  min-height: 20px;
+  margin: 25px;
+  padding: 15px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  max-width: 294px;
+  margin-top: 15px;
+}
+.arrow_space {
+  width: 60px;
+  height: auto;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+
+hr {
+  max-width: 261px;
+}
+.comment_field {
+  width:294px;
+  height: 120px;
+}
 }
 
 //Computer
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 835px) {
+  .arrow_back {
+    min-width: 39px;
+    min-height: 39px;
+    font-size: 39px;
+    margin: 32px 0px 0px 32px;
+    cursor: pointer;
+    position: absolute;
+    top: 80px;
+    left: 0px;
+  }
   .center {
     height: 100vh;
     display: flex;
@@ -215,5 +266,34 @@ hr {
   margin-bottom: 24px;
   width: 281px;
   height: 212px;
+}
+.comment {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.comment_content {
+  width: 449px;
+  background-color: #EEEEEE;
+  border-radius: 8px;
+  min-height: 20px;
+  margin: 25px;
+  padding: 15px;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  max-width: 713px;
+  margin-top: 20px;
+}
+hr {
+  max-width: 713px;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.comment_field {
+  width:570px;
+  height: 120px;
 }
 }
