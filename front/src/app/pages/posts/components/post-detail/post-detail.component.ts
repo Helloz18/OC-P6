@@ -38,6 +38,10 @@ export class PostDetailComponent implements OnInit {
     })
   }
 
+  sendComment() {
+    
+  }
+
   previous() {
     this.router.navigateByUrl('/posts');
   }
