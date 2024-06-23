@@ -1,1 +1,26 @@
-<p>post-detail works!</p>
+<mat-icon class="arrow_back" (click)="previous()">keyboard_backspace</mat-icon>
+
+<div *ngIf="postDTO" class="main">
+    <div class="column">
+   <h2>{{postDTO.title}}</h2>
+   
+    <div class="row">
+        <span>{{postDTO.createdAt | date: 'dd/MM/yyyy'}}</span>
+        <span>{{postDTO.author}}</span>
+        <span>{{postDTO.topicName}}</span>
+    </div>
+    <div class="content">{{postDTO.content}}</div>
+</div>
+</div>
+
+<hr>
+
+<div class="main">
+    <div class="column">
+    <div>Commentaires</div>
+    <div class="comment" *ngFor="let comment of postDTO.comments">
+        <div>{{comment.author}}</div>
+        <div class="comment_content">{{comment.content}}</div>
+    </div>
+</div>
+</div>

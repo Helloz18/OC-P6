@@ -1,0 +1,42 @@
+h2 {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29.05px;
+  }
+.row {
+    display: flex;
+    justify-content: start;
+}
+.comment {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+span {
+    margin-top: 20px;
+    margin-right: 50px;
+}
+
+.content { 
+    margin:25px 0px 25px 0px;
+}
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+}
+.comment_content {
+    width: 449px;
+    background-color: #EEEEEE;
+    border-radius: 8px;
+    min-height: 20px;
+    margin: 25px;
+    padding: 15px;
+}
