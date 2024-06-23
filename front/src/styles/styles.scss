@@ -13,6 +13,37 @@ body {
 a {
   cursor: pointer;
 }
+.text_courant {
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24.2px;
+  text-align: left;
+}
+.text_small {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+  text-align: left;
+}
+.text_title {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.05px;
+  text-align: left;
+}
+
+::placeholder {
+  font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24.2px;
+text-align: left;
+color: #8A8C8C;
+
+}
 
 .mdc-text-field {
   position: static !important;
@@ -145,6 +176,7 @@ a {
 .comment_author {
   align-self: flex-end;
   margin-right: 20px;
+  margin-bottom: 15px;
 }
 .comment_content {
   width: 232px;
@@ -153,6 +185,12 @@ a {
   min-height: 20px;
   margin: 25px;
   padding: 15px;
+  font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24.2px;
+text-align: left;
+
 }
 .column {
   display: flex;
@@ -174,6 +212,14 @@ hr {
 .comment_field {
   width:294px;
   height: 120px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px 75px 5px 5px;
+}
+.send {
+  width: 43px;
+  height: 43px;
+  margin-left: -60px;
 }
 }
 
@@ -279,6 +325,12 @@ hr {
   min-height: 20px;
   margin: 25px;
   padding: 15px;
+  font-family: Inter;
+font-size: 20px;
+font-weight: 400;
+line-height: 24.2px;
+text-align: left;
+
 }
 .column {
   display: flex;
@@ -295,5 +347,13 @@ hr {
 .comment_field {
   width:570px;
   height: 120px;
+  border: 1px solid black;
+  border-radius: 8px;
+padding: 10px;
+}
+.send {
+  width: 43px;
+  height: 43px;
+  margin-left: 25px;
 }
 }

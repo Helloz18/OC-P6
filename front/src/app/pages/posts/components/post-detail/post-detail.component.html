@@ -7,9 +7,9 @@
    <h2>{{postDTO.title}}</h2></div>
    
     <div class="row wrap">
-        <span>{{postDTO.createdAt | date: 'dd/MM/yyyy'}}</span>
-        <span>{{postDTO.author}}</span>
-        <span>{{postDTO.topicName}}</span>
+        <span class="text_courant">{{postDTO.createdAt | date: 'dd/MM/yyyy'}}</span>
+        <span class="text_courant">{{postDTO.author}}</span>
+        <span class="text_courant">{{postDTO.topicName}}</span>
     </div>
     <div class="content">{{postDTO.content}}</div>
 </div>
@@ -19,10 +19,14 @@
 
 <div class="main">
     <div class="column">
-    <div>Commentaires</div>
+    <div class="text_courant">Commentaires</div>
     <div class="comment" *ngFor="let comment of postDTO.comments">
-        <div class="comment_author">{{comment.author}}</div>
+        <div class="comment_author text_courant">{{comment.author}}</div>
         <div class="comment_content">{{comment.content}}</div>
+        
     </div>
+    <div class="row vertical">    
+    <textarea matInput type="text" class="comment_field" placeholder="Écrivez ici votre commentaire"></textarea><a><img class="send" src="/assets/send.png"></a>
 </div>
+
 </div>
