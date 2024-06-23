@@ -1,0 +1,32 @@
+<mat-icon class="arrow_back" (click)="previous()">keyboard_backspace</mat-icon>
+
+<div *ngIf="postDTO" class="main">
+    
+    <div class="column">
+        <div class="row">  <div class="arrow_space"></div> 
+   <h2>{{postDTO.title}}</h2></div>
+   
+    <div class="row wrap">
+        <span class="text_courant">{{postDTO.createdAt | date: 'dd/MM/yyyy'}}</span>
+        <span class="text_courant">{{postDTO.author}}</span>
+        <span class="text_courant">{{postDTO.topicName}}</span>
+    </div>
+    <div class="content">{{postDTO.content}}</div>
+</div>
+</div>
+
+<hr>
+
+<div class="main">
+    <div class="column">
+    <div class="text_courant">Commentaires</div>
+    <div class="comment" *ngFor="let comment of postDTO.comments">
+        <div class="comment_author text_courant">{{comment.author}}</div>
+        <div class="comment_content">{{comment.content}}</div>
+        
+    </div>
+    <div class="row vertical">    
+    <textarea matInput #commentToSend type="text" class="comment_field" placeholder="Écrivez ici votre commentaire"></textarea><a><img class="send" src="/assets/send.png" (click)="sendComment()"></a>
+</div>
+
+</div>
