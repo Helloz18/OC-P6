@@ -3,10 +3,12 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
 import com.openclassrooms.mddapi.dto.PostDTO;
 import com.openclassrooms.mddapi.dto.PostForListDTO;
+import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.security.JwtService;
+import com.openclassrooms.mddapi.service.ICommentService;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.ITopicService;
 import com.openclassrooms.mddapi.service.IUserService;
@@ -34,12 +36,18 @@ public class PostController {
     private JwtService jwtService;
     private IUserService userService;
     private ITopicService topicService;
+    private ICommentService commentService;
 
-    public PostController(IPostService postService, JwtService jwtService, IUserService userService, ITopicService topicService) {
+    public PostController(IPostService postService,
+                          JwtService jwtService,
+                          IUserService userService,
+                          ITopicService topicService,
+                          ICommentService commentService) {
         this.postService = postService;
         this.jwtService = jwtService;
         this.userService = userService;
         this.topicService = topicService;
+        this.commentService = commentService;
     }
 
     @PostMapping("")
@@ -102,9 +110,62 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
+    @Operation(summary = "Get a post by its Id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A PostDTO.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class))),
+            @ApiResponse(responseCode = "404", description = "The post doesn't exist in the database.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)))
+    })
     public ResponseEntity<?> getPostDTO(@PathVariable Long postId) {
-        PostDTO
-                postDTO = postService.getPostById(postId);
-        return ResponseEntity.ok().body(postDTO);
+        try {
+            PostDTO
+                    postDTO =
+                    postService.getPostById(postId);
+            return ResponseEntity.ok().body(postDTO);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseMessage(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/{postId}/comment")
+    @Operation(summary = "Create a new commentaire.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Comment is saved in database.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class))),
+            @ApiResponse(responseCode = "404", description = "The user or the post doesn't exist in the database.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ResponseMessage.class)))
+    })
+    public ResponseEntity<?> saveComment(
+            @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
+            @RequestHeader("Authorization") String bearer,
+            @PathVariable Long postId, @RequestBody String content) {
+        try {
+        String
+                emailToken =
+                jwtService.getEmailByToken(bearer.substring(7));
+        if (userService.getUserByEmail(emailToken).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseMessage("L'utilisateur n'existe pas."));
+            }
+            User
+                    user =
+                    userService.getUserByEmail(emailToken).orElseThrow();
+            Post
+                    post =
+                    postService.findPostById(postId);
+            commentService.saveComment(user, post, content);
+
+            return ResponseEntity.ok().body(new ResponseMessage("Comment saved"));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseMessage(e.getMessage()));
+        }
     }
 }

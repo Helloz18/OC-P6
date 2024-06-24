@@ -82,4 +82,9 @@ public class PostService implements IPostService {
 
 		return postDTO;
 	}
+
+	@Override
+	public Post findPostById(Long postId) {
+		return postRepository.findById(postId).orElseThrow(() -> new NoSuchElementException("L'article n'existe pas."));
+	}
 }
