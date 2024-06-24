@@ -2,8 +2,8 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.CommentDTO;
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
+import com.openclassrooms.mddapi.dto.PostDetailDTO;
 import com.openclassrooms.mddapi.dto.PostDTO;
-import com.openclassrooms.mddapi.dto.PostForListDTO;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
@@ -26,48 +26,66 @@ public class PostService implements IPostService {
 	}
 
 
+	/**
+	 * Save a new Post in the database. The creation date of the post is set in this method.
+	 * @param user
+	 * @param topic
+	 * @param postCreateDTO
+	 */
 	@Override
 	public void savePost(User user,Topic topic, PostCreateDTO postCreateDTO) {
 		Post post = new Post();
-		//get from DTO
+
+		post.setUser(user);
 		post.setTopic(topic);
 		post.setTitle(postCreateDTO.getTitle());
 		post.setContent(postCreateDTO.getContent());
-		// automatic add
 		post.setCreatedAt(String.valueOf(Instant.now()));
-		post.setUser(user);
+
 		postRepository.save(post);
 	}
 
+	/**
+	 * Get PostDTOs from the topics subscribed by the user.
+	 * @param user
+	 * @return a List of PostDTO
+	 */
 	@Override
-	public List<PostForListDTO> getPosts(User user) {
-		List<PostForListDTO>
-				listOfPostForListDTO = new ArrayList<>();
+	public List<PostDTO> getPosts(User user) {
+		List<PostDTO>
+				listOfPostsDTO = new ArrayList<>();
 		for(Topic t : user.getTopics()) {
 			List<Post> posts = postRepository.findByTopic_id(t.getId());
 			for(Post p : posts) {
-				PostForListDTO
-						postForListDTO = new PostForListDTO();
-				postForListDTO.setId(p.getId());
-				postForListDTO.setTitle(p.getTitle());
-				postForListDTO.setContent(p.getContent());
-				postForListDTO.setCreatedAt(p.getCreatedAt());
-				postForListDTO.setAuthor(p.getUser().getName());
-				listOfPostForListDTO.add(postForListDTO);
+				PostDTO
+						postsDTO = new PostDTO();
+				postsDTO.setId(p.getId());
+				postsDTO.setTitle(p.getTitle());
+				postsDTO.setContent(p.getContent());
+				postsDTO.setCreatedAt(p.getCreatedAt());
+				postsDTO.setAuthor(p.getUser().getName());
+				listOfPostsDTO.add(postsDTO);
 			}
 		}
-		return listOfPostForListDTO;
+		return listOfPostsDTO;
 	}
 
+	/**
+	 * Get a PostDetailDTO by its Id.
+	 * A PostDetailDTO contains a different structure than a Post to send only the usefull information to the view.
+	 * @param postId id of the post.
+	 * @return a PostDetailDTO
+	 */
 	@Override
-	public PostDTO getPostById(Long postId) {
+	public PostDetailDTO getPostById(Long postId) {
 		Post post = postRepository.findById(postId).orElseThrow(() -> new NoSuchElementException("L'article n'existe pas."));
-		PostDTO postDTO = new PostDTO();
-		postDTO.setAuthor(post.getUser().getName());
-		postDTO.setTitle(post.getTitle());
-		postDTO.setContent(post.getContent());
-		postDTO.setCreatedAt(post.getCreatedAt());
-		postDTO.setTopicName(post.getTopic().getName());
+		PostDetailDTO
+				postDetailDTO = new PostDetailDTO();
+		postDetailDTO.setAuthor(post.getUser().getName());
+		postDetailDTO.setTitle(post.getTitle());
+		postDetailDTO.setContent(post.getContent());
+		postDetailDTO.setCreatedAt(post.getCreatedAt());
+		postDetailDTO.setTopicName(post.getTopic().getName());
 
 		List<CommentDTO> commentsDTO = new ArrayList<>();
 		for(Comment comment: post.getComments()) {
@@ -78,13 +96,19 @@ public class PostService implements IPostService {
 			commentsDTO.add(commentDTO);
 		}
 
-		postDTO.setComments(commentsDTO);
+		postDetailDTO.setComments(commentsDTO);
 
-		return postDTO;
+		return postDetailDTO;
 	}
 
+	/**
+	 * Find a Post by its Id.
+	 * @param postId
+	 * @return a Post
+	 */
 	@Override
 	public Post findPostById(Long postId) {
-		return postRepository.findById(postId).orElseThrow(() -> new NoSuchElementException("L'article n'existe pas."));
+		return postRepository.findById(postId).orElseThrow(
+				() -> new NoSuchElementException("L'article n'existe pas."));
 	}
 }
