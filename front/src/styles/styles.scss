@@ -249,7 +249,7 @@ hr {
     left: 0px;
   }
   .center {
-    height: 100vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -258,6 +258,7 @@ hr {
   .logo_full_screen {
     width: 412px;
     height: 238px;
+    margin-bottom: 50px;
   }
 
   .logo_header {
