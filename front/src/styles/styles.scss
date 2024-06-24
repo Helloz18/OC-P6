@@ -27,6 +27,13 @@ a {
   line-height: 16.94px;
   text-align: left;
 }
+.text_tri {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.36px;
+  text-align: left;
+}
 .text_title {
   font-family: Inter;
   font-size: 24px;
@@ -34,6 +41,7 @@ a {
   line-height: 29.05px;
   text-align: left;
 }
+
 
 ::placeholder {
   font-family: Inter;
@@ -221,6 +229,11 @@ hr {
   height: 43px;
   margin-left: -60px;
 }
+.spaceBetween {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 }
 
 //Computer
@@ -355,5 +368,13 @@ padding: 10px;
   width: 43px;
   height: 43px;
   margin-left: 25px;
+}
+.spaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+.triPosition {
+  margin-right: 41px;
+  margin-top: 25px;
 }
 }
