@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,36 +89,40 @@ public class UserController {
             @RequestHeader("Authorization") String bearer,
             @PathVariable String email, @RequestBody LoginRequestDTO loginRequestDTO
     ) {
-        if (!email.equals(loginRequestDTO.getEmail())) {
-            if (!userService.getUserByEmail(loginRequestDTO.getEmail()).isEmpty()) {
-                return ResponseEntity.status(HttpStatus.CONFLICT)
-                        .body(new ResponseMessage(("Cet email est déjà utilisé dans l'application.")));
-            }
-        } else {
-            if (userService.getUserByEmail(email).isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseMessage("L'utilisateur n'existe pas."));
-            } else {
-                if (bearer == null) {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                            .body(new ResponseMessage("Token non valide."));
-                } else {
-                    //The bearer token from the header is given with "bearer " before the actual token.
-                    //we remove this part to just give the token to the service.
-                    String
-                            emailToken =
-                            jwtService.getEmailByToken(bearer.substring(7));
-                    //Verify that the token is linked to the user who wants modification
-                    if (!emailToken.equals(email)) {
-                        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                                .body(new ResponseMessage(
-                                        "L'utilisateur utilise un token non généré par ses credentials."));
-                    }
-                }
-                userService.updateUser(email, loginRequestDTO);
-            }
-        }
-        return ResponseEntity.ok(new ResponseMessage("User modifié et enregistré en base de données."));
+       try {
+           if (!email.equals(loginRequestDTO.getEmail())) {
+               if (!userService.getUserByEmail(loginRequestDTO.getEmail()).isEmpty()) {
+                   return ResponseEntity.status(HttpStatus.CONFLICT)
+                           .body(new ResponseMessage(("Cet email est déjà utilisé dans l'application.")));
+               }
+           } else {
+               if (userService.getUserByEmail(email).isEmpty()) {
+                   return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                           .body(new ResponseMessage("L'utilisateur n'existe pas."));
+               } else {
+                   if (bearer == null) {
+                       return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                               .body(new ResponseMessage("Token non valide."));
+                   } else {
+                       //The bearer token from the header is given with "bearer " before the actual token.
+                       //we remove this part to just give the token to the service.
+                       String
+                               emailToken =
+                               jwtService.getEmailByToken(bearer.substring(7));
+                       //Verify that the token is linked to the user who wants modification
+                       if (!emailToken.equals(email)) {
+                           return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                                   .body(new ResponseMessage(
+                                           "L'utilisateur utilise un token non généré par ses credentials."));
+                       }
+                   }
+                   userService.updateUser(email, loginRequestDTO);
+               }
+           }
+           return ResponseEntity.ok(new ResponseMessage("User modifié et enregistré en base de données."));
+       }catch (Exception e) {
+           return ResponseEntity.badRequest().body(new ResponseMessage("Une erreur est survenue. Vérifiez vos entrées."));
+       }
     }
 
     @PutMapping("/topic/{topicId}")
