@@ -23,4 +23,8 @@ export class PostService {
   getPostById(id: number) {
     return this.http.get<PostDTO>( BACKEND_URL + '/'+id);
   }
+
+  saveComment(postId: number, content: string) {
+    return this.http.post(BACKEND_URL + '/' + postId + '/comment', content);
+  }
 }

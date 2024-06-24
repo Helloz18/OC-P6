@@ -40,6 +40,14 @@ export class PostDetailComponent implements OnInit {
 
   sendComment(comment:string) {
     console.log(comment);
+    this.postService.saveComment(this.id, comment).subscribe({
+      next: () => {
+        alert("Commentaire enregistré");
+      },
+      error: (error) => {
+        alert(error.error.message);
+      }
+    })
   }
 
   previous() {
