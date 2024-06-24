@@ -5,7 +5,6 @@ import com.openclassrooms.mddapi.dto.UserDTO;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Slf4j
 @Service
 public class UserService implements IUserService, UserDetailsService {
 
@@ -30,6 +28,11 @@ public class UserService implements IUserService, UserDetailsService {
          return userRepository.findByEmail(email);
     }
 
+    /**
+     * Get a UserDTO by its Email. The UserDTO will not contain the password for safety purpose.
+     * @param email
+     * @return a UserDTO.
+     */
     @Override
     public UserDTO getUserDTOByEmail(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -40,9 +43,13 @@ public class UserService implements IUserService, UserDetailsService {
         return userDTO;
     }
 
+    /**
+     * Save a user in the database. The password is encrypted with Bcrypt.
+     * @param loginRequestDTO
+     * @throws Exception
+     */
     @Override
     public void save(LoginRequestDTO loginRequestDTO) throws Exception {
-        log.info("Save new user: " + loginRequestDTO.getEmail());
         if (userRepository.findByEmail(loginRequestDTO.getEmail()).isPresent()) {
             throw new Exception("The email provided may be registered already: " + loginRequestDTO.getEmail());
         } else {
@@ -54,27 +61,50 @@ public class UserService implements IUserService, UserDetailsService {
         }
     }
 
+    /**
+     * UserDetails needed for Spring Security.
+     * @param email
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+        User user = userRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("User not found."));
         return new LoginRequestDTO(user.getEmail(), user.getPassword(), user.getName());
     }
 
+    /**
+     * Update a user: fields that can be updated: name and/or email and/or password.
+     * A check is done to compare the name and the new name, if there are different, then the name is changed.
+     * The same is done for email.
+     * For password, we use Bcrypt method to compare the new password with the hash saved in database.
+     * @param email
+     * @param loginRequestDTO
+     */
     @Override
     public void updateUser(String email, LoginRequestDTO loginRequestDTO) {
-    User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
+    User user = userRepository.findByEmail(email).orElseThrow(
+            () -> new UsernameNotFoundException("User not found."));
         if(!user.getName().equals(loginRequestDTO.getName()) && loginRequestDTO.getName() != null) {
             user.setName(loginRequestDTO.getName());
         }
         if(!user.getEmail().equals(loginRequestDTO.getEmail()) && loginRequestDTO.getEmail() != null) {
             user.setEmail(loginRequestDTO.getEmail());
         }
-        if(!user.getPassword().equals(loginRequestDTO.getPassword()) && loginRequestDTO.getPassword() != null) {
+        if(!(passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword()))
+                && loginRequestDTO.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(loginRequestDTO.getPassword()));
         }
         userRepository.save(user);
     }
 
+    /**
+     * Unsubscribe to a topic.
+     * @param topic the topic to remove from subscriptions.
+     * @param email the email of the user who wants to unsubscribe.
+     * @return a String to inform the user if the topic is removed or not.
+     */
     @Override
     public String unsubscribe(Topic topic, String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -89,6 +119,12 @@ public class UserService implements IUserService, UserDetailsService {
         }
     }
 
+    /**
+     * Subscribe to a Topic.
+     * @param topic the topic to add to subscriptions.
+     * @param email the email of the user who wants to subscribe.
+     * @return a String to inform the user if the subscription is done or not.
+     */
     @Override
     public String subscribe(Topic topic, String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
