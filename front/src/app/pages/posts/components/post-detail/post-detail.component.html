@@ -17,7 +17,7 @@
 
 <hr>
 
-<div class="main">
+<div class="main" *ngIf="postDTO">
     <div class="column">
     <div class="text_courant">Commentaires</div>
     <div class="comment" *ngFor="let comment of postDTO.comments">

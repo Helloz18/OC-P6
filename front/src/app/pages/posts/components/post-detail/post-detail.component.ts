@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-detail',
@@ -39,13 +40,13 @@ export class PostDetailComponent implements OnInit {
   }
 
   sendComment(comment:string) {
-    console.log(comment);
     this.postService.saveComment(this.id, comment).subscribe({
-      next: () => {
+      next: (data) => {
         alert("Commentaire enregistré");
+        this.getPost();
       },
       error: (error) => {
-        alert(error.error.message);
+        alert(JSON.stringify(error.error.message));
       }
     })
   }
