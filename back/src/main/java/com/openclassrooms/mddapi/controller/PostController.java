@@ -136,7 +136,7 @@ public class PostController {
                     postService.findPostById(postId);
             commentService.saveComment(user, post, content);
 
-            return ResponseEntity.ok().body("comment saved");
+            return ResponseEntity.ok().body(new ResponseMessage("Comment saved"));
         }
     }
 }
