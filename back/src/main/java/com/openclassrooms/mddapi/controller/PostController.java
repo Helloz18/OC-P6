@@ -3,10 +3,12 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
 import com.openclassrooms.mddapi.dto.PostDTO;
 import com.openclassrooms.mddapi.dto.PostForListDTO;
+import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.security.JwtService;
+import com.openclassrooms.mddapi.service.ICommentService;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.ITopicService;
 import com.openclassrooms.mddapi.service.IUserService;
@@ -34,12 +36,18 @@ public class PostController {
     private JwtService jwtService;
     private IUserService userService;
     private ITopicService topicService;
+    private ICommentService commentService;
 
-    public PostController(IPostService postService, JwtService jwtService, IUserService userService, ITopicService topicService) {
+    public PostController(IPostService postService,
+                          JwtService jwtService,
+                          IUserService userService,
+                          ITopicService topicService,
+                          ICommentService commentService) {
         this.postService = postService;
         this.jwtService = jwtService;
         this.userService = userService;
         this.topicService = topicService;
+        this.commentService = commentService;
     }
 
     @PostMapping("")
@@ -106,5 +114,29 @@ public class PostController {
         PostDTO
                 postDTO = postService.getPostById(postId);
         return ResponseEntity.ok().body(postDTO);
+    }
+
+    @PostMapping("/{postId}/comment")
+    public ResponseEntity<?> saveComment(
+            @Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
+            @RequestHeader("Authorization") String bearer,
+            @PathVariable Long postId, @RequestBody String content) {
+        String
+                emailToken =
+                jwtService.getEmailByToken(bearer.substring(7));
+        if (userService.getUserByEmail(emailToken).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseMessage("L'utilisateur n'existe pas."));
+        } else {
+            User
+                    user =
+                    userService.getUserByEmail(emailToken).orElseThrow();
+            Post
+                    post =
+                    postService.findPostById(postId);
+            commentService.saveComment(user, post, content);
+
+            return ResponseEntity.ok().body("comment saved");
+        }
     }
 }
