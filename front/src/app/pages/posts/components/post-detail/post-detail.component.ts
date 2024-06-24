@@ -46,7 +46,7 @@ export class PostDetailComponent implements OnInit {
         this.getPost();
       },
       error: (error) => {
-        alert(JSON.stringify(error.error.message));
+        alert(error.error.message);
       }
     })
   }
