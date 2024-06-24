@@ -25,6 +25,7 @@ export class TokenStorageService {
    */
   signOut(): void {
     window.sessionStorage.clear();
+    this.loggedIn.set(false);
   }
 
   /**
