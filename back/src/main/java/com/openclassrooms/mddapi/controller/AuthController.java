@@ -61,7 +61,7 @@ public class AuthController {
     })
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         if(userService.getUserByEmail(loginRequest.getEmail()).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("The user is unknown."));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Vérifiez l'email et le mot de passe."));
         } else {
 
         Map<String, String> token = new HashMap<>();
