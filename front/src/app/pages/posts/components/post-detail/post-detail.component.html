@@ -26,7 +26,8 @@
         
     </div>
     <div class="row vertical">    
-    <textarea matInput #commentToSend type="text" class="comment_field" placeholder="Écrivez ici votre commentaire"></textarea><a><img class="send" src="/assets/send.png" (click)="sendComment()"></a>
+    <textarea matInput #commentToSend type="text" class="comment_field" placeholder="Écrivez ici votre commentaire"></textarea>
+    <a><img class="send" src="/assets/send.png" (click)="sendComment(commentToSend.value)"></a>
 </div>
 
 </div>

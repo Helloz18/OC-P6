@@ -38,8 +38,8 @@ export class PostDetailComponent implements OnInit {
     })
   }
 
-  sendComment() {
-    
+  sendComment(comment:string) {
+    console.log(comment);
   }
 
   previous() {
