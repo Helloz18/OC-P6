@@ -4,7 +4,6 @@ package com.openclassrooms.mddapi.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -22,7 +21,8 @@ public class Post {
 	@Column(nullable = false)
 	private String title;
 
-	@Column(nullable = false)
+	@Lob
+	@Column(nullable = false, columnDefinition = "LONGTEXT")
 	private String content;
 	
 	@ManyToOne
