@@ -38,8 +38,8 @@ export class LoginComponent {
             this.router.navigateByUrl('/posts');
           }
         },
-        error: (e) => {
-          console.log(e);
+        error: (error) => {
+          alert(error.error.message);
         }
       })
     }

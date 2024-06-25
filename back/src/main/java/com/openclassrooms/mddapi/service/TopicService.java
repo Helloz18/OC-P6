@@ -17,12 +17,21 @@ public class TopicService implements ITopicService {
 		this.topicRepository = topicRepository;
 	}
 
+	/**
+	 * Get a Topic by its Id.
+	 * @param id the Id of the Topic.
+	 * @return a Topic.
+	 */
 	@Override
 	public Topic findTopicById(Long id) {
 		return topicRepository.findById(id)
 				.orElseThrow(() -> new NoSuchElementException("Le topic n'existe pas."));
 	}
 
+	/**
+	 * Get the list of all topics.
+	 * @return a List of topics.
+	 */
 	@Override
 	public List<Topic> getTopics() {
 		return topicRepository.findAll();

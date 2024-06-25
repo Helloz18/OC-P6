@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.PostCreateDTO;
+import com.openclassrooms.mddapi.dto.PostDetailDTO;
 import com.openclassrooms.mddapi.dto.PostDTO;
-import com.openclassrooms.mddapi.dto.PostForListDTO;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.ResponseMessage;
 import com.openclassrooms.mddapi.model.Topic;
@@ -87,7 +87,7 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of PostListDTO",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = PostForListDTO.class)))
+                            schema = @Schema(implementation = PostDTO.class)))
     })
     public ResponseEntity<?> getPosts(@Parameter(description = "Bearer token", example = "Bearer eyJhbGciOJIUzI1NiJ9...")
                            @RequestHeader("Authorization") String bearer
@@ -102,7 +102,7 @@ public class PostController {
                 User
                         user =
                         userService.getUserByEmail(emailToken).orElseThrow();
-                List<PostForListDTO>
+                List<PostDTO>
                         posts =
                         postService.getPosts(user);
                 return ResponseEntity.ok().body(posts);
@@ -121,10 +121,10 @@ public class PostController {
     })
     public ResponseEntity<?> getPostDTO(@PathVariable Long postId) {
         try {
-            PostDTO
-                    postDTO =
+            PostDetailDTO
+                    postDetailDTO =
                     postService.getPostById(postId);
-            return ResponseEntity.ok().body(postDTO);
+            return ResponseEntity.ok().body(postDetailDTO);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new ResponseMessage(e.getMessage()));

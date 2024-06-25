@@ -17,6 +17,12 @@ public class CommentService implements ICommentService {
         this.commentRepository = commentRepository;
     }
 
+    /**
+     * Save a comment. A comment has a content, is written by a User about a Post.
+     * @param user
+     * @param post
+     * @param content
+     */
     @Override
     public void saveComment(User user, Post post, String content) {
         Comment
