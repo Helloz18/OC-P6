@@ -1,5 +1,25 @@
 .topics_list {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+//Media query for responsive design
+//Mobile
+@media screen and (min-width: 0px) and (max-width: 834px) {
+  .listOfTopics {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
+  }
+}
+
+//Computer
+@media only screen and (min-width: 835px) {
+  .listOfTopics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 800px;
+  }
 }

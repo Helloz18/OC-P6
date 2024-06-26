@@ -106,12 +106,6 @@ color: #8A8C8C;
   }
 
   
-  .listOfTopics {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    // max-width: 800px;
-  }
 
   .two_items_per_row {
     max-width: 100%;
@@ -218,12 +212,6 @@ hr {
     content: url("/assets/user.png");
   }
 
-  .listOfTopics {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 800px;
-  }
   .two_items_per_row {
     max-width: 50%;
   }
