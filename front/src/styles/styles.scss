@@ -106,15 +106,6 @@ color: #8A8C8C;
   }
 
   
-  .topic {
-    width: 268px;
-    height: 161px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-  }
   .listOfTopics {
     display: flex;
     flex-wrap: wrap;
@@ -225,15 +216,6 @@ hr {
   .active_icon {
     margin-top: 2px;
     content: url("/assets/user.png");
-  }
-  .topic {
-    width: 391.79px;
-    height: 161px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
   }
 
   .listOfTopics {
