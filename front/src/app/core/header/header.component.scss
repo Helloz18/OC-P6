@@ -53,3 +53,55 @@
     background-color: rgba(#EFEFEF,0.7); 
     z-index: 2;
 }
+
+//Media query for responsive design
+
+//Mobile
+@media screen and (min-width: 0px) and (max-width: 834px) {
+    .logo_header {
+        width: 92px;
+        height: 53px;
+      }
+    
+      .toolbar_home {
+        display: none;
+      }
+    
+      .toolbar_computer {
+        display: none;
+      }
+      .mat-toolbar {
+        min-height: 62px !important;
+        background-color: white !important;
+        border-bottom: 1px solid black;
+      }
+      .logo_header_mobile {
+        width: 225px;
+        height: 130px;
+        display: flex;
+        justify-content: center;
+      }
+     
+}
+
+//Computer
+@media only screen and (min-width: 835px) {
+        
+    .logo_header {
+        width: 140px;
+        height: 81px;
+      }
+    
+      .logo_header_mobile {
+        display: none;
+      }
+      .toolbar_mobile {
+        display: none;
+      }
+      .mat-toolbar {
+        min-height: 94px !important;
+        background-color: white !important;
+        border-bottom: 1px solid black;
+      }
+ 
+}

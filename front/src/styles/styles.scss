@@ -106,29 +106,6 @@ color: #8A8C8C;
     width: 225px;
     height: 130px;
   }
-  .logo_header {
-    width: 92px;
-    height: 53px;
-  }
-
-  .toolbar_home {
-    display: none;
-  }
-
-  .toolbar_computer {
-    display: none;
-  }
-  .mat-toolbar {
-    min-height: 62px !important;
-    background-color: white !important;
-    border-bottom: 1px solid black;
-  }
-  .logo_header_mobile {
-    width: 225px;
-    height: 130px;
-    display: flex;
-    justify-content: center;
-  }
   .align_button {
     margin-top: 54px;
     display: flex;
@@ -261,22 +238,6 @@ hr {
     margin-bottom: 50px;
   }
 
-  .logo_header {
-    width: 140px;
-    height: 81px;
-  }
-
-  .logo_header_mobile {
-    display: none;
-  }
-  .toolbar_mobile {
-    display: none;
-  }
-  .mat-toolbar {
-    min-height: 94px !important;
-    background-color: white !important;
-    border-bottom: 1px solid black;
-  }
   .align_button {
     display: flex;
     flex-direction: row;
