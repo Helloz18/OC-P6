@@ -41,3 +41,22 @@
     max-height: 50px;
     margin-bottom: 24px;
   }
+
+//Media query for responsive design
+//Mobile
+@media screen and (min-width: 0px) and (max-width: 834px) {
+  .logo_header_mobile {
+    width: 225px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+//Computer
+@media only screen and (min-width: 835px) {
+  .logo_header_mobile {
+    display: none;
+  }
+}
+  
