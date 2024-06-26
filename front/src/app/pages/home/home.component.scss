@@ -5,3 +5,25 @@
   border-radius: 8px;
   font-weight: 600;
 }
+
+//Media query for responsive design
+//Mobile
+@media screen and (min-width: 0px) and (max-width: 834px) {
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+//Computer
+@media only screen and (min-width: 835px) {
+  .center {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
