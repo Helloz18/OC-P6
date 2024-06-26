@@ -14,6 +14,10 @@
 .active {
   color: var(--customColor) !important;
 }
+.active_icon {
+  margin-top: 2px !important;
+  content: url("/assets/user.png");
+}
 .right_part {
   width: 100%;
   column-gap: 1em;
