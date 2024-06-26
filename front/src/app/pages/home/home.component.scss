@@ -20,6 +20,13 @@
     width: 225px;
     height: 130px;
   }
+  .align_button {
+    margin-top: 54px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 116.5px;
+  }
 }
 
 //Computer
@@ -35,5 +42,11 @@
     width: 412px;
     height: 238px;
     margin-bottom: 50px;
+  }
+  .align_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 377px;
   }
 }
