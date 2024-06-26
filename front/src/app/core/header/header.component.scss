@@ -1,96 +1,102 @@
 .profil {
-    color: grey !important;
-    width: 48px;
-    height: 48px;
-    font-size: 48px;
+  color: grey !important;
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
 }
 .header_btn {
-    font-family: Inter;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24.2px;
-    text-align: left;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24.2px;
+  text-align: left;
 }
 .active {
-    color: var(--customColor) !important;
+  color: var(--customColor) !important;
 }
 .right_part {
-    width: 100%;
-    column-gap: 1em;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 25px;
-    align-items: center;
-    z-index: 2;
+  width: 100%;
+  column-gap: 1em;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 25px;
+  align-items: center;
+  z-index: 2;
 }
 .hide {
-    display: none;
+  display: none;
 }
 .show {
-    display: block;
-    position: fixed;
-    right:0px;
-    top: 0px;
-    width:184px;
-    border: 1px solid black;
-    background-color: white;
+  display: block;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  width: 184px;
+  border: 1px solid black;
+  background-color: white;
 }
 .column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content:space-between;
-  }
-.space { 
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.space {
+  height: 100%;
 }
 .overlay {
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    position: fixed;
-    background-color: rgba(#EFEFEF,0.7); 
-    z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(#efefef, 0.7);
+  z-index: 2;
 }
 
 //Media query for responsive design
 //Mobile
 @media screen and (min-width: 0px) and (max-width: 834px) {
-    .logo_header {
-        width: 92px;
-        height: 53px;
-      }
-    
-      .toolbar_home {
-        display: none;
-      }
-    
-      .toolbar_computer {
-        display: none;
-      }
-      .mat-toolbar {
-        min-height: 62px !important;
-        background-color: white !important;
-        border-bottom: 1px solid black;
-      }
+  .logo_header {
+    width: 92px;
+    height: 53px;
+  }
+  .logo_user {
+    width: 48px;
+    height: 48px;
+    margin-right: 5px;
+  }
+  .toolbar_home {
+    display: none;
+  }
+
+  .toolbar_computer {
+    display: none;
+  }
+  .mat-toolbar {
+    min-height: 62px !important;
+    background-color: white !important;
+    border-bottom: 1px solid black;
+  }
 }
 
 //Computer
 @media only screen and (min-width: 835px) {
-        
-    .logo_header {
-        width: 140px;
-        height: 81px;
-      }
-    
-    
-      .toolbar_mobile {
-        display: none;
-      }
-      .mat-toolbar {
-        min-height: 94px !important;
-        background-color: white !important;
-        border-bottom: 1px solid black;
-      }
+  .logo_header {
+    width: 140px;
+    height: 81px;
+  }
+  .logo_user {
+    width: 48px;
+    height: 48px;
+    margin-top: 10px;
+  }
+  .toolbar_mobile {
+    display: none;
+  }
+  .mat-toolbar {
+    min-height: 94px !important;
+    background-color: white !important;
+    border-bottom: 1px solid black;
+  }
 }
