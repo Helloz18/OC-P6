@@ -13,7 +13,9 @@ body {
 a {
   cursor: pointer;
 }
-::placeholder {
+
+// custom Material elements
+::placeholder, .mat-mdc-select-placeholder {
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
@@ -21,8 +23,9 @@ a {
   text-align: left;
   color: #8A8C8C;
 }
-
-// custom material for form fields
+.mat-mdc-select-arrow svg {
+  display: none !important;
+}
 .mdc-line-ripple::before, .mdc-line-ripple::after {
   border: none !important;
 }
