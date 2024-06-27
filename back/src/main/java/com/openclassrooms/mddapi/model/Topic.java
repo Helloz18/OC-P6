@@ -23,7 +23,8 @@ public class Topic {
 	@Column(nullable = false)
 	private String name;
 
-	@Column
+	@Lob
+	@Column(nullable = false, columnDefinition = "TEXT")
 	private String description;
 
 	@JsonIgnore
