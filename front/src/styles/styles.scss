@@ -13,26 +13,16 @@ body {
 a {
   cursor: pointer;
 }
-
-.text_title {
-  font-family: Inter;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 29.05px;
-  text-align: left;
-}
-
-
 ::placeholder {
   font-family: Inter;
-font-size: 20px;
-font-weight: 400;
-line-height: 24.2px;
-text-align: left;
-color: #8A8C8C;
-
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24.2px;
+  text-align: left;
+  color: #8A8C8C;
 }
 
+// custom material for form fields
 .mdc-line-ripple::before, .mdc-line-ripple::after {
   border: none !important;
 }
@@ -42,8 +32,6 @@ color: #8A8C8C;
 .mdc-text-field--filled {
   background-color: transparent !important;
 }
-
-// custom material for form fields
 .mat-mdc-form-field-error {
   border: none !important;
   margin-top: -20px;
@@ -69,9 +57,7 @@ color: #8A8C8C;
   margin: 15px;
 }
 
-
-//Media query for responsive design
-
+//Media query for responsive design on several components
 //Mobile
 @media screen and (min-width: 0px) and (max-width: 834px) {
   .arrow_back {
@@ -93,13 +79,6 @@ color: #8A8C8C;
     margin-bottom: 24px;
     width: 250px;
     height: 212px;
-  }
-  .column {
-    display: flex;
-    flex-direction: column;
-    max-width: 294px;
-    margin-top: 15px;
-    align-items: center;
   }
   .arrow_space {
     width: 60px;
@@ -139,13 +118,6 @@ color: #8A8C8C;
     margin-bottom: 24px;
     width: 281px;
     height: 212px;
-  }
-  .column {
-    display: flex;
-    flex-direction: column;
-    max-width: 713px;
-    margin-top: 20px;
-    align-items: center;
   }
   hr {
     max-width: 713px;
