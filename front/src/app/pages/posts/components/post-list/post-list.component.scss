@@ -10,7 +10,7 @@
 }
 .displayList {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     margin-left:20px;
     margin-right: 20px;
@@ -19,4 +19,19 @@
     height: 16px;
     margin-left: 10px;
     vertical-align: middle;
+}
+//Media query for responsive design
+//Mobile
+@media screen and (min-width: 0px) and (max-width: 834px) {
+    .triPosition {
+        margin-bottom: 20px;
+      }
+}
+
+//Computer
+@media only screen and (min-width: 835px) {
+    .triPosition {
+        margin-right: 41px;
+        margin-top: 25px;
+      }
 }
