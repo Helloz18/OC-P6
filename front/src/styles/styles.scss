@@ -9,64 +9,51 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   --customColor: #7763c5;
 }
-
 a {
   cursor: pointer;
 }
-.text_courant {
+// custom Material elements
+::placeholder,
+.mat-mdc-select-placeholder {
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
   line-height: 24.2px;
   text-align: left;
+  color: #8a8c8c;
 }
-.text_small {
-  font-family: Inter;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16.94px;
-  text-align: left;
+.mat-mdc-select-arrow svg {
+  display: none !important;
 }
-.text_tri {
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 19.36px;
-  text-align: left;
+.mdc-line-ripple::before,
+.mdc-line-ripple::after {
+  border: none !important;
 }
-.text_title {
-  font-family: Inter;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 29.05px;
-  text-align: left;
-}
-
-
-::placeholder {
-  font-family: Inter;
-font-size: 20px;
-font-weight: 400;
-line-height: 24.2px;
-text-align: left;
-color: #8A8C8C;
-
-}
-
 .mdc-text-field {
-  position: static !important;
+  border: none !important;
+  overflow: visible !important; //for textarea to use multipe lines
+}
+//remove background of form field when cursor inside
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+.mdc-text-field--filled {
+  background-color: transparent !important;
 }
 .mat-mdc-form-field-error {
+  border: none !important;
   margin-top: -20px;
 }
 .mat-mdc-text-field-wrapper {
   min-height: 50px;
   max-height: 50px;
   margin-bottom: 20px;
+  border: none !important;
+  border-color: transparent !important;
 }
 .colored_border {
   @extend .mat-mdc-text-field-wrapper;
-  border: 2px solid var(--customColor);
+  border: 2px solid var(--customColor) !important;
   border-radius: 8px;
   max-height: 50px;
   margin-bottom: 24px;
@@ -74,14 +61,11 @@ color: #8A8C8C;
 .mat-mdc-form-field-subscript-wrapper {
   height: 0px !important;
 }
-
 .mat-mdc-select-trigger {
   margin: 15px;
 }
 
-
-//Media query for responsive design
-
+//Media query for responsive design on several components
 //Mobile
 @media screen and (min-width: 0px) and (max-width: 834px) {
   .arrow_back {
@@ -94,146 +78,19 @@ color: #8A8C8C;
     top: 40px;
     left: 0px;
   }
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .logo_full_screen {
-    margin-top: 32px;
-    width: 225px;
-    height: 130px;
-  }
-  .logo_header {
-    width: 92px;
-    height: 53px;
-  }
-
-  .toolbar_home {
-    display: none;
-  }
-
-  .toolbar_computer {
-    display: none;
-  }
-  .mat-toolbar {
-    min-height: 62px !important;
-    background-color: white !important;
-    border-bottom: 1px solid black;
-  }
-  .logo_header_mobile {
-    width: 225px;
-    height: 130px;
-    display: flex;
-    justify-content: center;
-  }
-  .align_button {
-    margin-top: 54px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 116.5px;
-  }
-
-  .logo_user {
-    width: 48px;
-    height: 48px;
-    margin-right: 5px;
-  }
-  .topic {
-    width: 268px;
-    height: 161px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-  }
-  .listOfTopics {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    // max-width: 800px;
-  }
-
-  .two_items_per_row {
-    max-width: 100%;
-  }
-  .createWidth {
-    width: 250px;
-  }
   .mat-mdc-select {
-    width: 250px !important;
+    max-width: 250px !important;
   }
-   
-.colored_textarea_border {
-  border: 2px solid var(--customColor);
-  border-radius: 8px;
-  margin-bottom: 24px;
-  width: 250px;
-  height: 212px;
-}
-.comment {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: baseline;
-  justify-content: right;
-}
-.comment_author {
-  align-self: flex-end;
-  margin-right: 20px;
-  margin-bottom: 15px;
-}
-.comment_content {
-  width: 232px;
-  //background-color: #EEEEEE;
-  //border-radius: 8px;
-  min-height: 20px;
-  margin: 25px;
-  padding: 15px;
-  font-family: Inter;
-font-size: 20px;
-font-weight: 400;
-line-height: 24.2px;
-text-align: left;
-
-}
-.column {
-  display: flex;
-  flex-direction: column;
-  max-width: 294px;
-  margin-top: 15px;
-}
-.arrow_space {
-  width: 60px;
-  height: auto;
-}
-.wrap {
-  flex-wrap: wrap;
-}
-
-hr {
-  max-width: 261px;
-}
-.comment_field {
-  width:294px;
-  height: 120px;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 5px 75px 5px 5px;
-}
-.send {
-  width: 43px;
-  height: 43px;
-  margin-left: -60px;
-}
-.spaceBetween {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .colored_textarea_border {
+    border: 2px solid var(--customColor);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    width: 250px;
+    height: 212px;
+  }
+  hr {
+    max-width: 261px;
+  }
 }
 
 //Computer
@@ -248,134 +105,17 @@ hr {
     top: 80px;
     left: 0px;
   }
-  .center {
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .logo_full_screen {
-    width: 412px;
-    height: 238px;
-    margin-bottom: 50px;
-  }
-
-  .logo_header {
-    width: 140px;
-    height: 81px;
-  }
-
-  .logo_header_mobile {
-    display: none;
-  }
-  .toolbar_mobile {
-    display: none;
-  }
-  .mat-toolbar {
-    min-height: 94px !important;
-    background-color: white !important;
-    border-bottom: 1px solid black;
-  }
-  .align_button {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 377px;
-  }
-  .logo_user {
-    width: 48px;
-    height: 48px;
-    margin-top: 10px;
-  }
-  .active_icon {
-    margin-top: 2px;
-    content: url("/assets/user.png");
-  }
-  .topic {
-    width: 391.79px;
-    height: 161px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .listOfTopics {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 800px;
-  }
-  .two_items_per_row {
-    max-width: 50%;
-  }
-  
-  .createWidth {
-    width: 281px;
-    height: 212px;
-  }
   .mat-mdc-select {
     width: 281px !important;
   }
-  
-.colored_textarea_border {
-  border: 2px solid var(--customColor);
-  border-radius: 8px;
-  margin-bottom: 24px;
-  width: 281px;
-  height: 212px;
-}
-.comment {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-}
-.comment_content {
-  width: 449px;
-  background-color: #EEEEEE;
-  border-radius: 8px;
-  min-height: 20px;
-  margin: 25px;
-  padding: 15px;
-  font-family: Inter;
-font-size: 20px;
-font-weight: 400;
-line-height: 24.2px;
-text-align: left;
-
-}
-.column {
-  display: flex;
-  flex-direction: column;
-  max-width: 713px;
-  margin-top: 20px;
-}
-hr {
-  max-width: 713px;
-}
-.wrap {
-  flex-wrap: wrap;
-}
-.comment_field {
-  width:570px;
-  height: 120px;
-  border: 1px solid black;
-  border-radius: 8px;
-padding: 10px;
-}
-.send {
-  width: 43px;
-  height: 43px;
-  margin-left: 25px;
-}
-.spaceBetween {
-  display: flex;
-  justify-content: space-between;
-}
-.triPosition {
-  margin-right: 41px;
-  margin-top: 25px;
-}
+  .colored_textarea_border {
+    border: 2px solid var(--customColor);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    width: 281px;
+    height: 212px;
+  }
+  hr {
+    max-width: 713px;
+  }
 }

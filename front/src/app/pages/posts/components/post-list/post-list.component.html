@@ -1,8 +1,11 @@
-<div class="spaceBetween">
-<button mat-button class="button_size" (click)="createPost()">Créer un article</button>
-<a class="text_tri triPosition" (click)="trier()">Trier par<img class="arrow_down" src="/assets/arrowDown.png">
-</a>
+<div class="column">
+  <button mat-button class="button_size" (click)="createPost()">
+    Créer un article
+  </button>
+  <a class="text_tri triPosition" (click)="trier()"
+    >Trier par<img class="arrow_down" src="/assets/arrowDown.png" />
+  </a>
 </div>
 <div class="displayList">
-<app-post *ngFor="let post of listOfPosts" [post]="post"></app-post>
+  <app-post *ngFor="let post of listOfPosts" [post]="post"></app-post>
 </div>

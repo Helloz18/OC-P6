@@ -11,7 +11,7 @@ import { AddPostComponent } from '../pages/posts/components/add-post/add-post.co
 /**
  * ShellComponent will contain the header that will be displayed on every pages of the application
  * That's why routes such as login have to be in children of ShellComponent
- * The toolbar of the header will display some information in case of the user is connected
+ * The toolbar of the header will display some buttons in case of the user is connected
  */
 export const CORE_ROUTES: Routes = [
   { path: '', component: ShellComponent, 

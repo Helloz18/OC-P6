@@ -6,20 +6,17 @@ export const authInterceptorProviders: HttpInterceptorFn = (req, next) => {
   const authToken = inject(TokenStorageService).getToken();
 
   if(authToken) {
-  // Clone the request and add the authorization header
+  //Clone the request and add the authorization header
   const authReq = req.clone({
-   // withCredentials: true,
     setHeaders: {
       Authorization: `Bearer ${authToken}`,
     }
   });
-  
-  console.log(authReq)
 
-  // Pass the cloned request with the updated header to the next handler
-  return next(authReq);
+    //Pass the cloned request with the updated header to the next handler
+    return next(authReq);
 } else {
     return next(req);
   }
 };
-// provide to httpClient in main.ts the interceptor : provideHttpClient(withInterceptors([authInterceptorProviders])),
+//IMPORTANT : provide to httpClient in main.ts the interceptor : provideHttpClient(withInterceptors([authInterceptorProviders]))

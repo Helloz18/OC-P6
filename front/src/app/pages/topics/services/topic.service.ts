@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { Topic } from '../interfaces/topic';
 
-const BACKEND_URL= environment.backendUrl + "/topic"
+const BACKEND_URL= environment.backendUrl + "/topic";
 
 @Injectable({
   providedIn: 'root'

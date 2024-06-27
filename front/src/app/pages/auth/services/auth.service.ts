@@ -24,8 +24,6 @@ export class AuthService {
   
   /**
    * login method
-   * @param username
-   * @param password
    * @returns
    */
   login(loginRequest: LoginRequest): Observable<any> {
@@ -39,9 +37,7 @@ export class AuthService {
   }
 
   /**
-   * login method
-   * @param username
-   * @param password
+   * register method
    * @returns
    */
   register(loginRequest: LoginRequest): Observable<any> {

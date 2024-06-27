@@ -1,42 +1,64 @@
 <mat-icon class="arrow_back" (click)="goToHome()">keyboard_backspace</mat-icon>
 
-  <!-- this logo will be displayed only on mobile -->
+<!-- this logo will be displayed only on mobile -->
 <div class="position">
-  <img class="logo_header_mobile" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
+  <img class="logo_mobile" src="assets/logo_p6.png" alt="Monde De Dev Logo" />
 </div>
 
 <div class="formulaire">
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  
-<h2>Inscription</h2>
-  <div class="column">
-    <span class="label">Nom d'utilisateur</span>
-  <mat-form-field appearance="outline" class="outline">
-    <input matInput formControlName="name" required>
-  </mat-form-field>
-  <mat-error *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched">
-    Un nom d'utilisateur est requis.
-  </mat-error>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h2>Inscription</h2>
+    <div class="column">
+      <span class="label">Nom d'utilisateur</span>
+      <mat-form-field appearance="outline" class="outline">
+        <input matInput formControlName="name" required />
+      </mat-form-field>
+      <mat-error
+        *ngIf="
+          registerForm.controls['name'].invalid &&
+          registerForm.controls['name'].touched
+        "
+      >
+        Un nom d'utilisateur est requis.
+      </mat-error>
 
-  <span class="label">Adresse e-mail</span>
-<mat-form-field appearance="outline" class="outline">
-  <input matInput type="email" formControlName="email" required>
-</mat-form-field>
-<mat-error *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
-  Un email est requis.
-</mat-error>
+      <span class="label">Adresse e-mail</span>
+      <mat-form-field appearance="outline" class="outline">
+        <input matInput type="email" formControlName="email" required />
+      </mat-form-field>
+      <mat-error
+        *ngIf="
+          registerForm.controls['email'].invalid &&
+          registerForm.controls['email'].touched
+        "
+      >
+        Un email est requis.
+      </mat-error>
 
+      <span class="label">Mot de passe</span>
+      <mat-form-field appearance="outline" class="outline">
+        <input matInput type="password" formControlName="password" required />
+      </mat-form-field>
+      <mat-error
+        *ngIf="
+          registerForm.controls['password'].invalid &&
+          registerForm.controls['password'].touched
+        "
+      >
+        Un password de minimum 8 caractères, contenant au moins un chiffre, une
+        lettre minuscule, une lettre majuscule et un caractère spécial est
+        requis.
+      </mat-error>
 
-<span class="label">Mot de passe</span>
-  <mat-form-field appearance="outline" class="outline">
-    <input matInput type="password" formControlName="password" required>
-  </mat-form-field>
-  <mat-error *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
-    Un password de minimum 8 caractères, contenant au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial est requis.
-  </mat-error>
-
-  
-  <button mat-flat-button type="submit" class="button_size" routerLink="/login"  [disabled]="registerForm.invalid">S'inscrire</button>
+      <button
+        mat-flat-button
+        type="submit"
+        class="button_size"
+        routerLink="/login"
+        [disabled]="registerForm.invalid"
+      >
+        S'inscrire
+      </button>
+    </div>
+  </form>
 </div>
-    </form>
-  </div>

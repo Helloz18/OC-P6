@@ -4,14 +4,7 @@ import { environment } from 'src/environments/environment';
 import { UserProfile } from '../interfaces/user-profile';
 import { LoginRequest } from '../../auth/interfaces/login-request';
 
-const BACKEND_URL= environment.backendUrl + "/profile"
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'Authorization',
-  }),
-};
+const BACKEND_URL= environment.backendUrl + "/profile";
 
 @Injectable({
   providedIn: 'root'

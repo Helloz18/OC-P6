@@ -10,10 +10,9 @@ import { Topic } from '../../interfaces/topic';
   standalone: true,
   imports: [CommonModule, TopicComponent],
   templateUrl: './topic-list.component.html',
-  styleUrl: './topic-list.component.scss'
+  styleUrl: './topic-list.component.scss',
 })
 export class TopicListComponent implements OnInit {
-
   @Input()
   user!: UserProfile;
   @Input()
@@ -27,8 +26,8 @@ export class TopicListComponent implements OnInit {
   constructor(private topicService: TopicService) {}
 
   ngOnInit(): void {
-    if(!this.comesFromProfile) {
-     this.getAllTopics();
+    if (!this.comesFromProfile) {
+      this.getAllTopics();
     }
   }
 
@@ -40,8 +39,10 @@ export class TopicListComponent implements OnInit {
     this.topicService.getAll().subscribe({
       next: (topics) => {
         this.allTopics = topics;
+      },
+      error: (error) => {
+        alert(error.error.message);
       }
-    })
+    });
   }
-
 }

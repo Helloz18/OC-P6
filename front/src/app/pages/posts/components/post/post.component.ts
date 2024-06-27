@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PostForListDTO } from '../../interfaces/post-dto';
+import { PostDTO } from '../../interfaces/post-dto';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PostComponent {
 
   @Input()
-  post!: PostForListDTO;
+  post!: PostDTO;
 
   constructor(private router: Router) {}
 

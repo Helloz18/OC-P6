@@ -1,5 +1,10 @@
 .topics_list {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.listOfTopics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
