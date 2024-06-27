@@ -12,9 +12,6 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-  .two_items_per_row {
-    max-width: 100%;
-  }
 }
 
 //Computer
@@ -22,10 +19,6 @@
   .listOfTopics {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 800px;
-  }
-  .two_items_per_row {
-    max-width: 50%;
+    justify-content: center;
   }
 }
