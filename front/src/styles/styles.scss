@@ -88,11 +88,6 @@ a {
   hr {
     max-width: 261px;
   }
-  .spaceBetween {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 //Computer
@@ -120,8 +115,4 @@ a {
   hr {
     max-width: 713px;
   }
-  .spaceBetween {
-    display: flex;
-    justify-content: space-between;
-}
 }
