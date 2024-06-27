@@ -16,6 +16,11 @@
   text-align: left;
   padding: 0px 15px;
   margin-bottom: 15px;
+  text-overflow: ellipsis; //to display "..." if text too long
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; // max nb lines to show
+  -webkit-box-orient: vertical;
 }
 .button_size {
   width: 166.97px;
