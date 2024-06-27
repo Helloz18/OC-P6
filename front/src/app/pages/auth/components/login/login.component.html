@@ -12,7 +12,7 @@
     <div class="column">
   
     <span class="label">Adresse e-mail</span>
-  <mat-form-field appearance="outline" class="outline">
+  <mat-form-field class="outline">
     <input matInput type="email" formControlName="email" required>
   </mat-form-field>
   <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
@@ -21,7 +21,7 @@
   
   
   <span class="label">Mot de passe</span>
-    <mat-form-field appearance="outline" class="outline">
+    <mat-form-field class="outline">
       <input matInput type="password" formControlName="password" required>
     </mat-form-field>
     <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
