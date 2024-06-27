@@ -28,6 +28,11 @@ a {
 }
 .mdc-text-field {
   border: none !important;
+  overflow: visible !important; //for textarea to use multipe lines
+}
+//remove background of form field when cursor inside
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
 }
 .mdc-text-field--filled {
   background-color: transparent !important;
