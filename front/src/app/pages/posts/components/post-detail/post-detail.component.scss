@@ -40,6 +40,10 @@ span {
 //Media query for responsive design
 //Mobile
 @media screen and (min-width: 0px) and (max-width: 834px) {
+  .arrow_space {
+    width: 60px;
+    height: auto;
+  }
   .comment {
     display: flex;
     flex-direction: column-reverse;
