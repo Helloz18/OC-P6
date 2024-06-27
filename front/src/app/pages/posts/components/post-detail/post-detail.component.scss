@@ -40,9 +40,8 @@ span {
 //Media query for responsive design
 //Mobile
 @media screen and (min-width: 0px) and (max-width: 834px) {
-  .arrow_space {
-    width: 60px;
-    height: auto;
+  .display_title {
+    margin-left: 60px;
   }
   .comment {
     display: flex;
@@ -99,7 +98,6 @@ span {
     display: flex;
     align-items: baseline;
     justify-content: center;
-    //margin-left: 38px;
   }
   .comment_content {
     width: 449px;
