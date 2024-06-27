@@ -104,49 +104,38 @@ color: #8A8C8C;
     top: 40px;
     left: 0px;
   }
-  
-
-
-
-  
-
-  .createWidth {
-    width: 250px;
-  }
   .mat-mdc-select {
-    width: 250px !important;
+    max-width: 250px !important;
   }
-   
-.colored_textarea_border {
-  border: 2px solid var(--customColor);
-  border-radius: 8px;
-  margin-bottom: 24px;
-  width: 250px;
-  height: 212px;
-}
-.column {
-  display: flex;
-  flex-direction: column;
-  max-width: 294px;
-  margin-top: 15px;
-}
-.arrow_space {
-  width: 60px;
-  height: auto;
-}
-.wrap {
-  flex-wrap: wrap;
-}
-
-hr {
-  max-width: 261px;
-}
-
-.spaceBetween {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .colored_textarea_border {
+    border: 2px solid var(--customColor);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    width: 250px;
+    height: 212px;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    max-width: 294px;
+    margin-top: 15px;
+    align-items: center;
+  }
+  .arrow_space {
+    width: 60px;
+    height: auto;
+  }
+  .wrap {
+    flex-wrap: wrap;
+  }
+  hr {
+    max-width: 261px;
+  }
+  .spaceBetween {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 //Computer
@@ -161,46 +150,31 @@ hr {
     top: 80px;
     left: 0px;
   }
-  
-  
-
-
-  
-
-
-  
-  .createWidth {
+  .mat-mdc-select {
+    width: 281px !important;
+  }   
+  .colored_textarea_border {
+    border: 2px solid var(--customColor);
+    border-radius: 8px;
+    margin-bottom: 24px;
     width: 281px;
     height: 212px;
   }
-  .mat-mdc-select {
-    width: 281px !important;
+  .column {
+    display: flex;
+    flex-direction: column;
+    max-width: 713px;
+    margin-top: 20px;
+    align-items: center;
   }
-  
-.colored_textarea_border {
-  border: 2px solid var(--customColor);
-  border-radius: 8px;
-  margin-bottom: 24px;
-  width: 281px;
-  height: 212px;
+  hr {
+    max-width: 713px;
+  }
+  .wrap {
+    flex-wrap: wrap;
+  }
+  .spaceBetween {
+    display: flex;
+    justify-content: space-between;
 }
-
-.column {
-  display: flex;
-  flex-direction: column;
-  max-width: 713px;
-  margin-top: 20px;
-}
-hr {
-  max-width: 713px;
-}
-.wrap {
-  flex-wrap: wrap;
-}
-
-.spaceBetween {
-  display: flex;
-  justify-content: space-between;
-}
-
 }

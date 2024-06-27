@@ -1,8 +1,4 @@
-.formulaire {
-    display: flex;
-    justify-content:center;
-    margin-top: 20px;
-}
+
 .button_size {
     width: 128px;
     height: 40px;
@@ -25,7 +21,29 @@
     font-weight: 400;
     line-height: 19.36px;
   }
-  .position {
+  //Media query for responsive design
+//Mobile
+@media screen and (min-width: 0px) and (max-width: 834px) {
+  .formulaire {
     display: flex;
-    justify-content: center;
-  }
+    justify-content:center;
+    margin-top: 80px;
+}
+
+.createWidth {
+  width: 250px;
+}
+}
+
+//Computer
+@media only screen and (min-width: 835px) {
+  .formulaire {
+    display: flex;
+    justify-content:center;
+    margin-top: 20px;
+}
+
+.createWidth {
+  width: 281px;
+}
+}
