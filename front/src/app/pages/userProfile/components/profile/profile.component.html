@@ -39,8 +39,10 @@
           userProfileForm.controls['password'].touched
         "
       >
-      Un password de minimum 8 caractères, contenant au moins un chiffre, une lettre minuscule, une lettre majuscule et un caractère spécial est requis.
-    </mat-error>
+        Un password de minimum 8 caractères, contenant au moins un chiffre, une
+        lettre minuscule, une lettre majuscule et un caractère spécial est
+        requis.
+      </mat-error>
 
       <button
         mat-flat-button
@@ -51,13 +53,16 @@
       >
         Sauvegarder
       </button>
-
     </div>
   </form>
-  
+
   <a class="logout" (click)="logout()">Se déconnecter</a>
 </div>
-<hr>
+<hr />
 <h2>Abonnements</h2>
-<app-topic-list class="topics_list" [user]="userProfile" [comesFromProfile] = "true"
-(topicListUpdated)="updateTopic($event)"></app-topic-list>
+<app-topic-list
+  class="topics_list"
+  [user]="userProfile"
+  [comesFromProfile]="true"
+  (topicListUpdated)="updateTopic($event)"
+></app-topic-list>

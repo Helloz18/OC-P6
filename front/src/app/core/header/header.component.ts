@@ -24,6 +24,10 @@ export class HeaderComponent {
   
  constructor(private tokenService: TokenStorageService) {}
 
+ /**
+  * this method is for mobile menu
+  * @param event 
+  */
  openCloseMenu(event: Event) {
     const mymenu = this.menu.nativeElement;
     const myoverlay = this.overlay.nativeElement;

@@ -1,19 +1,18 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Topic } from "../../interfaces/topic";
-import { MatButtonModule } from "@angular/material/button";
-import { UserProfileService } from "src/app/pages/userProfile/services/user-profile.service";
-import { TopicService } from "../../services/topic.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Topic } from '../../interfaces/topic';
+import { MatButtonModule } from '@angular/material/button';
+import { UserProfileService } from 'src/app/pages/userProfile/services/user-profile.service';
+import { TopicService } from '../../services/topic.service';
 
 @Component({
   selector: 'app-topic',
   standalone: true,
   imports: [CommonModule, MatButtonModule],
   templateUrl: './topic.component.html',
-  styleUrls: ['./topic.component.scss']
+  styleUrls: ['./topic.component.scss'],
 })
 export class TopicComponent {
-
   @Input()
   topic!: Topic;
   @Input()
@@ -21,23 +20,26 @@ export class TopicComponent {
   @Input()
   forProfile!: boolean;
 
-  @Output() 
+  @Output()
   updateTopicList = new EventEmitter<number>();
 
-  constructor(private userProfileService: UserProfileService, private topicService: TopicService) {}
+  constructor(
+    private userProfileService: UserProfileService,
+    private topicService: TopicService
+  ) {}
 
-  unsubscribe(topicId: number){
-    console.log("email:"+ this.email)
+  unsubscribe(topicId: number) {
+    console.log('email:' + this.email);
     this.userProfileService.unsubscribe(topicId, this.email).subscribe({
       next: (data) => {
-          let message = JSON.parse(JSON.stringify(data)).message;
-          alert(message);
-          this.updateTopicList.emit(topicId);
+        let message = JSON.parse(JSON.stringify(data)).message;
+        alert(message);
+        this.updateTopicList.emit(topicId);
       },
       error: (error) => {
         alert(error.error.message);
       }
-    })
+    });
   }
 
   subscribe(topicId: number) {
@@ -49,6 +51,6 @@ export class TopicComponent {
       error: (error) => {
         alert(error.error.message);
       }
-    })
+    });
   }
 }

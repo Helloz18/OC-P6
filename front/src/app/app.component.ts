@@ -10,5 +10,5 @@ import { HomeComponent } from './pages/home/home.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'front';
+  title = 'Monde De Dev';
 }

@@ -6,32 +6,43 @@ import { Topic } from 'src/app/pages/topics/interfaces/topic';
 import { TopicService } from 'src/app/pages/topics/services/topic.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { PostCreateDTO } from '../../interfaces/post-dto';
 
-
 @Component({
   selector: 'app-add-post',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+  ],
   templateUrl: './add-post.component.html',
-  styleUrl: './add-post.component.scss'
+  styleUrl: './add-post.component.scss',
 })
 export class AddPostComponent implements OnInit {
-
   postForm!: FormGroup;
 
   topics: Topic[] = [];
 
-  constructor(private fb: FormBuilder, private topicService: TopicService, private router: Router, private postService: PostService) {
+  constructor(
+    private fb: FormBuilder,
+    private topicService: TopicService,
+    private router: Router,
+    private postService: PostService
+  ) {
     this.postForm = this.fb.group({
       topicId: [''],
       title: [''],
-      content: ['']
-    })
+      content: [''],
+    });
   }
   ngOnInit(): void {
     this.getAllTopics();
@@ -44,27 +55,21 @@ export class AddPostComponent implements OnInit {
       },
       error: (error) => {
         alert(error.error.message);
-      }
-    })
-  }
-
-  changeTopic(event: Event) {
-    console.log(event);
+      },
+    });
   }
 
   onSubmit() {
-    console.log(this.postForm.value);
     let postCreateDTO: PostCreateDTO = this.postForm.value;
     this.postService.savePost(postCreateDTO).subscribe({
       next: () => {
-        alert("Article enregistré.");
+        alert('Article enregistré.');
         this.router.navigateByUrl('/posts');
       },
       error: (error) => {
         alert(error.error.message);
-      }
-    })
-
+      },
+    });
   }
 
   previous() {

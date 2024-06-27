@@ -10,6 +10,15 @@ const USER_KEY = 'auth-user';
 
 export class TokenStorageService {
 
+  /**
+   * A valid password: 
+   * - number of characters greater or equal to 8
+   * - contains at least one of each of this types of character
+   *    - a number
+   *    - a lowercase letter
+   *    - an uppercase letter
+   *    - a special character
+   */
   passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$';
 
   //thanks to signal we can be updated in real time of the changes of this value

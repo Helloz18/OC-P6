@@ -4,7 +4,7 @@ export interface PostCreateDTO {
     topicId: number
 }
 
-export interface PostForListDTO {
+export interface PostDTO {
     id: number,
     title: string,
     content: string,
@@ -12,7 +12,7 @@ export interface PostForListDTO {
     createdAt: string
 }
 
-export interface PostDTO {
+export interface PostDetailDTO {
     title: string,
     content: string,
     author: string,

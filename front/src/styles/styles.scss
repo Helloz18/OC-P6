@@ -9,24 +9,24 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   --customColor: #7763c5;
 }
-
 a {
   cursor: pointer;
 }
-
 // custom Material elements
-::placeholder, .mat-mdc-select-placeholder {
+::placeholder,
+.mat-mdc-select-placeholder {
   font-family: Inter;
   font-size: 20px;
   font-weight: 400;
   line-height: 24.2px;
   text-align: left;
-  color: #8A8C8C;
+  color: #8a8c8c;
 }
 .mat-mdc-select-arrow svg {
   display: none !important;
 }
-.mdc-line-ripple::before, .mdc-line-ripple::after {
+.mdc-line-ripple::before,
+.mdc-line-ripple::after {
   border: none !important;
 }
 .mdc-text-field {
@@ -107,7 +107,7 @@ a {
   }
   .mat-mdc-select {
     width: 281px !important;
-  }   
+  }
   .colored_textarea_border {
     border: 2px solid var(--customColor);
     border-radius: 8px;

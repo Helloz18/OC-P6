@@ -1,20 +1,18 @@
 <div class="listOfTopics" *ngIf="comesFromProfile && user">
-<app-topic 
-    *ngFor="let topic of user.topics" 
-    [email]="user.email" 
-    [topic]="topic" 
+  <app-topic
+    *ngFor="let topic of user.topics"
+    [email]="user.email"
+    [topic]="topic"
     [forProfile]="true"
-    class="two_items_per_row"
     (updateTopicList)="topicUpdated(topic.id!)"
-    ></app-topic>
+  ></app-topic>
 </div>
 
 <div class="topics_list" *ngIf="!comesFromProfile && allTopics">
-<div class="listOfTopics">
+  <div class="listOfTopics">
     <app-topic
-        *ngFor="let topic of allTopics"
-        [topic]="topic" 
-        class="two_items_per_row"
+      *ngFor="let topic of allTopics"
+      [topic]="topic"
     ></app-topic>
-</div>
+  </div>
 </div>
