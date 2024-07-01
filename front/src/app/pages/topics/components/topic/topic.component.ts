@@ -29,7 +29,6 @@ export class TopicComponent {
   ) {}
 
   unsubscribe(topicId: number) {
-    console.log('email:' + this.email);
     this.userProfileService.unsubscribe(topicId, this.email).subscribe({
       next: (data) => {
         let message = JSON.parse(JSON.stringify(data)).message;
