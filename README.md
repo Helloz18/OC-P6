@@ -7,6 +7,8 @@ This project uses a MySQL database.
 First create a database named mdd.
 Import the script `mdd_sample.sql` located in the resources folder of the project.
 
+<img src = "./resources/bdd.png">
+
 ### Backend
 
 This is a Spring Boot project with maven.
